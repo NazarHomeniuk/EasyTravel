@@ -7,7 +7,7 @@ namespace EasyTravel.Services.Helpers
     {
         public string BlaBlaCarDate(DateTime date, TimeSpan time)
         {
-            var timeString = time.ToString("HH:mm:ss");
+            var timeString = time.ToString("hh':'mm':'ss");
             var dateString = date.ToString("yyyy-MM-dd");
             return $"{dateString} {timeString}";
         }
@@ -19,7 +19,7 @@ namespace EasyTravel.Services.Helpers
 
         public string RailwayTime(TimeSpan time)
         {
-            return time.ToString("HH:mm");
+            return time.ToString("hh':'mm");
         }
 
         public string BusDate(DateTime date)

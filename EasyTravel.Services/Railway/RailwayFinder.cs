@@ -7,6 +7,7 @@ using System.Web;
 using EasyTravel.Contracts.Interfaces;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Models.Railway;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace EasyTravel.Services.Railway
@@ -17,11 +18,11 @@ namespace EasyTravel.Services.Railway
         private readonly IDateFormatter dateFormatter;
         private readonly RailwayConfig config;
 
-        public RailwayFinder(IHttpService httpService, IDateFormatter dateFormatter, RailwayConfig config)
+        public RailwayFinder(IHttpService httpService, IDateFormatter dateFormatter, IOptions<RailwayConfig> options)
         {
             this.httpService = httpService;
             this.dateFormatter = dateFormatter;
-            this.config = config;
+            config = options.Value;
         }
 
         public async Task<IEnumerable<ITrip>> FindTripsAsync(string from, string to, DateTime departureDate, TimeSpan departureTime)

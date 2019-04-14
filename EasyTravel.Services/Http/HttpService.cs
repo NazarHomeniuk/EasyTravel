@@ -11,7 +11,11 @@ namespace EasyTravel.Services.Http
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
-            request.Headers = headers;
+            if (headers != null)
+            {
+                request.Headers = headers;
+            }
+
             request.KeepAlive = keepAlive;
             return (HttpWebResponse) await request.GetResponseAsync();
         }

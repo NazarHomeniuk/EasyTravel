@@ -1,5 +1,12 @@
-﻿using EasyTravel.Core.Config;
+﻿using EasyTravel.Contracts.Interfaces;
+using EasyTravel.Core.Config;
 using EasyTravel.Core.Data;
+using EasyTravel.Services.BingMaps;
+using EasyTravel.Services.BlaBlaCar;
+using EasyTravel.Services.Bus;
+using EasyTravel.Services.Helpers;
+using EasyTravel.Services.Http;
+using EasyTravel.Services.Railway;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +29,19 @@ namespace EasyTravel.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddOptions();
             services.Configure<BlaBlaCarConfig>(Configuration.GetSection("BlaBlaCar"));
             services.Configure<RailwayConfig>(Configuration.GetSection("Railway"));
             services.Configure<BusConfig>(Configuration.GetSection("Bus"));
             services.Configure<BingMapsConfig>(Configuration.GetSection("BingMaps"));
+
+            services.AddTransient<BlaBlaCarFinder>();
+            services.AddTransient<RailwayFinder>();
+            services.AddTransient<BusFinder>();
+            services.AddTransient<IDateFormatter, DateFormatter>();
+            services.AddTransient<IHttpService, HttpService>();
+            services.AddTransient<IMapsService, MapsService>();
+
             services.AddDbContext<DataContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:EasyTravel"],
                 b => b.MigrationsAssembly("EasyTravel.Core")));
         }

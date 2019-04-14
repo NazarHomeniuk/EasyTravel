@@ -8,6 +8,7 @@ using EasyTravel.Contracts.Interfaces;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Models.Bus;
 using EasyTravel.Services.Helpers.Bus;
+using Microsoft.Extensions.Options;
 
 namespace EasyTravel.Services.Bus
 {
@@ -18,11 +19,11 @@ namespace EasyTravel.Services.Bus
         private readonly BusConfig config;
         private readonly IEnumerable<Station> availableStations;
 
-        public BusFinder(IHttpService httpService, IDateFormatter dateFormatter, BusConfig config)
+        public BusFinder(IHttpService httpService, IDateFormatter dateFormatter, IOptions<BusConfig> options)
         {
             this.httpService = httpService;
             this.dateFormatter = dateFormatter;
-            this.config = config;
+            config = options.Value;
             availableStations = GetAvailableStations().Result;
         }
 

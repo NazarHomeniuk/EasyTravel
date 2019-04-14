@@ -10,6 +10,7 @@ using BingMapsRESTToolkit;
 using EasyTravel.Contracts.Interfaces;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Data;
+using Microsoft.Extensions.Options;
 
 namespace EasyTravel.Services.BingMaps
 {
@@ -18,10 +19,10 @@ namespace EasyTravel.Services.BingMaps
         private readonly DataContext dataContext;
         private readonly BingMapsConfig config;
 
-        public MapsService(DataContext dataContext, BingMapsConfig config)
+        public MapsService(DataContext dataContext, IOptions<BingMapsConfig> options)
         {
             this.dataContext = dataContext;
-            this.config = config;
+            config = options.Value;
         }
 
         public async Task<IEnumerable<string>> FindLocationsBetweenAsync(string @from, string to)

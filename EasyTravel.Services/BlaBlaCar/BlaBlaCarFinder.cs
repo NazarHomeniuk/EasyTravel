@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using EasyTravel.Contracts.Interfaces;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Models.BlaBlaCar;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace EasyTravel.Services.BlaBlaCar
 {
@@ -16,11 +18,11 @@ namespace EasyTravel.Services.BlaBlaCar
         private readonly IDateFormatter dateFormatter;
         private readonly BlaBlaCarConfig config;
 
-        public BlaBlaCarFinder(IHttpService httpService, IDateFormatter dateFormatter, BlaBlaCarConfig config)
+        public BlaBlaCarFinder(IHttpService httpService, IDateFormatter dateFormatter, IOptions<BlaBlaCarConfig> options)
         {
             this.httpService = httpService;
             this.dateFormatter = dateFormatter;
-            this.config = config;
+            config = options.Value;
         }
 
         public async Task<IEnumerable<ITrip>> FindTripsAsync(string from, string to, DateTime departureDate, TimeSpan departureTime)
@@ -33,7 +35,9 @@ namespace EasyTravel.Services.BlaBlaCar
             };
             var response = await httpService.MakeGetRequestAsync(url, headers);
             var responseString = await new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException()).ReadToEndAsync();
-            var data = JsonConvert.DeserializeObject<Trips>(responseString);
+            const string format = "dd/MM/yyyy HH:mm:ss";
+            var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = format };
+            var data = JsonConvert.DeserializeObject<Trips>(responseString, dateTimeConverter);
             return data.AvailableTrips;
         }
     }
