@@ -1,0 +1,30 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav #sidenav mode="push">
+      <mat-toolbar>
+          <img class="logo">
+          <span>Easy Travel</span>
+      </mat-toolbar>
+      <mat-nav-list>
+          <a mat-list-item routerLink="" (click)="sidenav.toggle()">
+              <mat-icon mat-list-icon>perm_identity</mat-icon>
+              Мій профіль
+          </a>
+          <a mat-list-item routerLink="find" (click)="sidenav.toggle()">
+              <mat-icon mat-list-icon>commute</mat-icon>
+              Маршрут
+          </a>
+          <a class="signOut" routerLink="" mat-list-item (click)="signOut()">
+              <mat-icon mat-list-icon>exit_to_app</mat-icon>
+              Вийти
+          </a>
+      </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+      <mat-toolbar>
+          <button mat-icon-button (click)="sidenav.toggle()">
+              <mat-icon>apps</mat-icon>
+          </button>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
