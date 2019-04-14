@@ -3,6 +3,7 @@ import { LocationsService } from 'src/app/services';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
+
 @Component({
   selector: 'app-find-form',
   templateUrl: './find-form.component.html',
@@ -12,11 +13,18 @@ export class FindFormComponent implements OnInit {
   
   fromInput = new FormControl();
   toInput = new FormControl();
+  dateInput = new FormControl();
+  timeInput = new FormControl();
+
+  minDate = new Date(Date.now());
+  minTime = `${new Date(Date.now()).getHours()}:${new Date(Date.now()).getMinutes()}`;
   @Output() submitButton = new EventEmitter();
   
   options: Observable<string[]>;
 
-  constructor(private locationsService: LocationsService) { }
+  constructor(private locationsService: LocationsService) { 
+
+  }
 
   ngOnInit() {
     this.fromInput.valueChanges.subscribe(prefix => {
@@ -32,7 +40,12 @@ export class FindFormComponent implements OnInit {
   }
 
   submit() {
-    this.submitButton.emit({ from: this.fromInput.value, to: this.toInput.value} );
+    this.submitButton.emit({ 
+      from: this.fromInput.value, 
+      to: this.toInput.value,
+      date: this.dateInput.value,
+      time: this.timeInput.value 
+    });
   }
 
   private autocomplete(value: string) {

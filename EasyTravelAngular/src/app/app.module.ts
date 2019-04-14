@@ -18,6 +18,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { 
   DashboardComponent,
@@ -55,10 +58,16 @@ import { LocationsService } from './services';
     MatAutocompleteModule,
     MatInputModule,
     MatFormFieldModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMaterialTimepickerModule
+     
   ],
   providers: [
-    LocationsService
+    LocationsService,
+    MatDatepickerModule,
+    { provide: MAT_DATE_LOCALE, useValue: 'uk-UA' } 
   ],
   bootstrap: [AppComponent]
 })
