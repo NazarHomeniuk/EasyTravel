@@ -19,7 +19,8 @@ namespace EasyTravel.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<string>> Get(string from, string to)
+        [Route("between")]
+        public async Task<IEnumerable<string>> Between(string from, string to)
         {
             return await mapsService.FindLocationsBetweenAsync(from, to);
         }

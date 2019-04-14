@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LocationsService } from 'src/app/services';
-import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-find-form',
@@ -12,7 +12,8 @@ export class FindFormComponent implements OnInit {
   
   fromInput = new FormControl();
   toInput = new FormControl();
-
+  @Output() submitButton = new EventEmitter();
+  
   options: Observable<string[]>;
 
   constructor(private locationsService: LocationsService) { }
@@ -27,14 +28,15 @@ export class FindFormComponent implements OnInit {
       if (prefix.length != 0) {
         this.autocomplete(prefix)
       }
-      });
-        
+    });   
+  }
+
+  submit() {
+    this.submitButton.emit({ from: this.fromInput.value, to: this.toInput.value} );
   }
 
   private autocomplete(value: string) {
     const filterValue = value.toLowerCase();
-
     this.options = this.locationsService.autocomplete(filterValue);
   }
-
 }

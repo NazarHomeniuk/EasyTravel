@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent, FindFormComponent } from './components';
+import { DashboardComponent, FindComponent } from './components';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, children: [
-    { path: 'find', component: FindFormComponent }
+    { path: 'find', component: FindComponent }
   ]}
 ];
 

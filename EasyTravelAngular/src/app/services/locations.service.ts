@@ -14,6 +14,10 @@ export class LocationsService {
     return this.httpClient.get<string[]>(`${environment.API_URL}locations/locations`);
   }
 
+  getLocationsBetween(from: string, to: string) : Observable<string[]> {
+    return this.httpClient.get<string[]>(`${environment.API_URL}maps/between?from=${from}&to=${to}`);
+  }
+
   autocomplete(prefix: string) : Observable<string[]> {
     return this.httpClient.get<string[]>(`${environment.API_URL}locations/autocomplete?prefix=${prefix}`);
   }
