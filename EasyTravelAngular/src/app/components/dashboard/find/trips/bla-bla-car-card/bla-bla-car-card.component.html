@@ -1,26 +1,28 @@
 <mat-accordion>
-    <mat-expansion-panel (opened)="carPanelClick()">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                {{from}}
-            </mat-panel-title>
-            <mat-panel-description>
-                Попутники
-            </mat-panel-description>
-        </mat-expansion-panel-header>
-        <mat-progress-spinner *ngIf="isLoading" color="primary" mode="indeterminate">
-            </mat-progress-spinner>
-        <mat-list>
-            <mat-list-item *ngFor="let car of cars;">
-                <mat-icon matListIcon>directions_car</mat-icon>
-                <h3 matLine></h3>
-                <p matLine>
-                    <span>{{car.departureDate}}</span>
-                </p>
-                <button mat-icon-button color="warn">
-                    <mat-icon>check_circle_outline</mat-icon>
-                </button>
-            </mat-list-item>
-        </mat-list>
-    </mat-expansion-panel>
+  <mat-expansion-panel (opened)="carPanelClick()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{from}}
+      </mat-panel-title>
+      <mat-panel-description>
+        Попутники
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div *ngIf="isLoading" fxLayout="row" fxLayoutAlign="center center">
+      <mat-progress-spinner color="primary" mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+    <mat-list>
+      <mat-list-item *ngFor="let car of cars;">
+        <mat-icon matListIcon>directions_car</mat-icon>
+        <h3 matLine></h3>
+        <p matLine>
+          <span>{{car.departureDate}}</span>
+        </p>
+        <button mat-icon-button color="warn">
+          <mat-icon>check_circle_outline</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
 </mat-accordion>

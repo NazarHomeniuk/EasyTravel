@@ -2,3 +2,11 @@
     height: 100%;
     width: 100%;
 }
+
+.column {
+    width: 30%;
+}
+
+.card {
+    width: 100%;
+}

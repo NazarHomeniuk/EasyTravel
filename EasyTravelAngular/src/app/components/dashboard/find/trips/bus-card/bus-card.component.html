@@ -8,8 +8,10 @@
                 Автобуси
             </mat-panel-description>
         </mat-expansion-panel-header>
-        <mat-progress-spinner *ngIf="isLoading" color="primary" mode="indeterminate">
-            </mat-progress-spinner>
+        <div *ngIf="isLoading" fxLayout="row" fxLayoutAlign="center center">
+                <mat-progress-spinner color="primary" mode="indeterminate">
+                </mat-progress-spinner>
+              </div>
         <mat-list>
             <mat-list-item *ngFor="let bus of buses;">
                 <mat-icon matListIcon>directions_bus</mat-icon>

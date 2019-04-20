@@ -8,8 +8,10 @@
                 Потяги
             </mat-panel-description>
         </mat-expansion-panel-header>
-        <mat-progress-spinner *ngIf="isLoading" color="primary" mode="indeterminate">
+        <div *ngIf="isLoading" fxLayout="row" fxLayoutAlign="center center">
+            <mat-progress-spinner color="primary" mode="indeterminate">
             </mat-progress-spinner>
+        </div>
         <mat-list>
             <mat-list-item *ngFor="let train of trains;">
                 <mat-icon matListIcon>train</mat-icon>

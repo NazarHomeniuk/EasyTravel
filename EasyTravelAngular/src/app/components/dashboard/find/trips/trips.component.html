@@ -2,14 +2,17 @@
     <div fxLayout="row" fxLayoutAlign="center start">
         <h1>{{startLocation}}</h1>
     </div>
-    <div fxLayout="row" fxLayoutAlign="center center">
-        <app-railway-card [from]="startLocation" [to]="finishLocation" [date]="date" [time]=time></app-railway-card>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="center center">
-            <app-bus-card [from]="startLocation" [to]="finishLocation" [date]="date" [time]=time></app-bus-card>
-    </div>
-    <div fxLayout="row" fxLayoutAlign="center center">
-            <app-bla-bla-car-card [from]="startLocation" [to]="finishLocation" [date]="date" [time]=time></app-bla-bla-car-card>
+    <div fxLayout="row" fxLayoutAlign="space-around start">
+        <div fxLayout="column" class="column" fxLayoutAlign="center center">
+            <app-railway-card class="card" [from]="startLocation" [to]="finishLocation" [date]="date" [time]=time></app-railway-card>
+        </div>
+        <div fxLayout="column" class="column" fxLayoutAlign="center center">
+            <app-bus-card class="card" [from]="startLocation" [to]="finishLocation" [date]="date" [time]=time></app-bus-card>
+        </div>
+        <div fxLayout="column" class="column" fxLayoutAlign="center center">
+            <app-bla-bla-car-card class="card" [from]="startLocation" [to]="finishLocation" [date]="date" [time]=time>
+            </app-bla-bla-car-card>
+        </div>
     </div>
     <div fxLayout="row" fxLayoutAlign="center end">
         <h1>{{finishLocation}}</h1>
