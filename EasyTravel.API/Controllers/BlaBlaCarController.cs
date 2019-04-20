@@ -24,5 +24,12 @@ namespace EasyTravel.API.Controllers
         {
             return await tripFinder.FindTripsAsync(request.From, request.To, request.Date, request.Time);
         }
+
+        [HttpPost]
+        [Route("findAll")]
+        public async Task<IEnumerable<ITrip>> FindAll(Request request)
+        {
+            return await tripFinder.FindAllTripsAsync(request.From, request.To, request.Date, request.Time);
+        }
     }
 }

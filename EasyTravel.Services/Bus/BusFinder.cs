@@ -16,13 +16,15 @@ namespace EasyTravel.Services.Bus
     {
         private readonly IHttpService httpService;
         private readonly IDateFormatter dateFormatter;
+        private readonly IMapsService mapsService;
         private readonly BusConfig config;
         private readonly IEnumerable<Station> availableStations;
 
-        public BusFinder(IHttpService httpService, IDateFormatter dateFormatter, IOptions<BusConfig> options)
+        public BusFinder(IHttpService httpService, IDateFormatter dateFormatter, IOptions<BusConfig> options, IMapsService mapsService)
         {
             this.httpService = httpService;
             this.dateFormatter = dateFormatter;
+            this.mapsService = mapsService;
             config = options.Value;
             availableStations = GetAvailableStations().Result;
         }
@@ -41,6 +43,19 @@ namespace EasyTravel.Services.Bus
             var responseString = await new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException()).ReadToEndAsync();
             var result = Parser.ParseTrips(responseString);
             return result;
+        }
+
+        public async Task<IEnumerable<ITrip>> FindAllTripsAsync(string @from, string to, DateTime departureDate, TimeSpan departureTime)
+        {
+            var buses = new List<ITrip>();
+            var locations = (await mapsService.FindLocationsBetweenAsync(from, to)).ToList();
+            for (var i = 1; i < locations.Count; ++i)
+            {
+                var result = await FindTripsAsync(from, locations[i], departureDate, departureTime);
+                buses.AddRange(result);
+            }
+
+            return buses;
         }
 
         private async Task<IEnumerable<Station>> GetAvailableStations()

@@ -17,11 +17,13 @@ namespace EasyTravel.Services.Railway
         private readonly IHttpService httpService;
         private readonly IDateFormatter dateFormatter;
         private readonly RailwayConfig config;
+        private readonly IMapsService mapsService;
 
-        public RailwayFinder(IHttpService httpService, IDateFormatter dateFormatter, IOptions<RailwayConfig> options)
+        public RailwayFinder(IHttpService httpService, IDateFormatter dateFormatter, IOptions<RailwayConfig> options, IMapsService mapsService)
         {
             this.httpService = httpService;
             this.dateFormatter = dateFormatter;
+            this.mapsService = mapsService;
             config = options.Value;
         }
 
@@ -29,6 +31,11 @@ namespace EasyTravel.Services.Railway
         {
             var fromStation = await GetStationsInfo(from);
             var toStation = await GetStationsInfo(to);
+            if (!fromStation.Any() || !toStation.Any())
+            {
+                return new List<ITrip>();
+            }
+
             var data = $"from={fromStation.First().Value}";
             data += $"&to={toStation.First().Value}";
             data += $"&date={dateFormatter.RailwayDate(departureDate)}";
@@ -38,6 +45,19 @@ namespace EasyTravel.Services.Railway
             var result = JsonConvert.DeserializeObject<TrainsInfo>(responseString);
             result.Data.List.RemoveAll(i => i.Types.Length == 0);
             return result.Data.List;
+        }
+
+        public async Task<IEnumerable<ITrip>> FindAllTripsAsync(string @from, string to, DateTime departureDate, TimeSpan departureTime)
+        {
+            var trains = new List<ITrip>();
+            var locations = (await mapsService.FindLocationsBetweenAsync(from, to)).ToList();
+            for (var i = 1; i < locations.Count; ++i)
+            {
+                var result = await FindTripsAsync(from, locations[i], departureDate, departureTime);
+                trains.AddRange(result);
+            }
+
+            return trains;
         }
 
         public async Task<List<StationInfo>> GetStationsInfo(string name)

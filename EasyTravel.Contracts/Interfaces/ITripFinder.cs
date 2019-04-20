@@ -7,5 +7,6 @@ namespace EasyTravel.Contracts.Interfaces
     public interface ITripFinder
     {
         Task<IEnumerable<ITrip>> FindTripsAsync(string from, string to, DateTime departureDate, TimeSpan departureTime);
+        Task<IEnumerable<ITrip>> FindAllTripsAsync(string from, string to, DateTime departureDate, TimeSpan departureTime);
     }
 }

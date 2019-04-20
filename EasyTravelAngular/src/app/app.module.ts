@@ -19,6 +19,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
@@ -27,10 +29,18 @@ import {
   FindComponent,
   FindFormComponent,
   TripsComponent,
-  LoadingComponent
+  LoadingComponent,
+  RailwayCardComponent,
+  BlaBlaCarCardComponent,
+  BusCardComponent
 } from './components/';
 
-import { LocationsService } from './services';
+import { 
+  LocationsService,
+  RailwayService,
+  BlaBlaCarService,
+  BusService 
+} from './services';
 
 @NgModule({
   declarations: [
@@ -39,7 +49,10 @@ import { LocationsService } from './services';
     FindFormComponent,
     TripsComponent,
     FindComponent,
-    LoadingComponent
+    LoadingComponent,
+    RailwayCardComponent,
+    BlaBlaCarCardComponent,
+    BusCardComponent
   ],
   imports: [
     BrowserModule,
@@ -60,12 +73,17 @@ import { LocationsService } from './services';
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
+    MatStepperModule,
+    MatExpansionModule,
     MatNativeDateModule,
     NgxMaterialTimepickerModule
      
   ],
   providers: [
     LocationsService,
+    RailwayService,
+    BlaBlaCarService,
+    BusService,
     MatDatepickerModule,
     { provide: MAT_DATE_LOCALE, useValue: 'uk-UA' } 
   ],

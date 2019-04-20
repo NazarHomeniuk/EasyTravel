@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { LocationsService } from 'src/app/services';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-find',
@@ -12,6 +13,8 @@ export class FindComponent implements OnInit {
   isLoading = false;
   isFound = false;
   locationsBetween: string[];
+  date: Date;
+  time: Time;
 
   constructor(private locationsService: LocationsService) { }
 
@@ -26,6 +29,8 @@ export class FindComponent implements OnInit {
       this.isLoading = false;
       this.isFound = true;
       this.locationsBetween = locations;
+      this.date = values.date;
+      this.time = values.time;
     });
   }
 }

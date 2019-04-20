@@ -1,0 +1,26 @@
+<mat-accordion>
+    <mat-expansion-panel (opened)="busPanelClick()">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{from}}
+            </mat-panel-title>
+            <mat-panel-description>
+                Автобуси
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-progress-spinner *ngIf="isLoading" color="primary" mode="indeterminate">
+            </mat-progress-spinner>
+        <mat-list>
+            <mat-list-item *ngFor="let bus of buses;">
+                <mat-icon matListIcon>directions_bus</mat-icon>
+                <h3 matLine>{{bus.from}} - {{bus.to}}</h3>
+                <p matLine>
+                    <span>{{bus.date}} {{bus.departureTime}}</span>
+                </p>
+                <button mat-icon-button color="warn">
+                    <mat-icon>check_circle_outline</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </mat-expansion-panel>
+</mat-accordion>
