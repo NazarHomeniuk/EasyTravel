@@ -19,7 +19,7 @@
                 <p matLine>
                     <span>{{train.from.date}} {{train.from.time}}</span>
                 </p>
-                <button mat-icon-button color="warn">
+                <button mat-icon-button color="warn" (click)="submit(train)">
                     <mat-icon>check_circle_outline</mat-icon>
                 </button>
             </mat-list-item>

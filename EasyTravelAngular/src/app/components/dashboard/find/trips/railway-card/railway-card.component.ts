@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RailwayService } from 'src/app/services';
-import { Request, Train } from 'src/app/models';
+import { Request, Train, BaseTrip, TripType } from 'src/app/models';
 import { Time } from '@angular/common';
 
 @Component({
@@ -11,6 +11,8 @@ import { Time } from '@angular/common';
 export class RailwayCardComponent implements OnInit {
 
   constructor(private railwayService: RailwayService) { }
+
+  @Output() submitButton = new EventEmitter();
   @Input() from: string;
   @Input() to: string;
   @Input() date: Date;
@@ -34,6 +36,13 @@ export class RailwayCardComponent implements OnInit {
       console.log(trains);
       this.trains = trains;
     })
+  }
+
+  submit(train: Train) {
+    var trip = new BaseTrip();
+    trip.type = TripType.Railway;
+    trip.train = train;
+    this.submitButton.emit(trip);
   }
 
 }

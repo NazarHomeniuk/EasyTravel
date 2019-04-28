@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { LocationsService } from 'src/app/services';
 import { Time } from '@angular/common';
 

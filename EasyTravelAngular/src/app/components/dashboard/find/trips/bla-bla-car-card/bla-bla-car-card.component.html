@@ -15,11 +15,11 @@
     <mat-list>
       <mat-list-item *ngFor="let car of cars;">
         <mat-icon matListIcon>directions_car</mat-icon>
-        <h3 matLine></h3>
+        <h3 matLine>{{car.departure_place.city_name}} - {{car.arrival_place.city_name}}</h3>
         <p matLine>
-          <span>{{car.departureDate}}</span>
+          <span>{{car.departure_date}}</span>
         </p>
-        <button mat-icon-button color="warn">
+        <button mat-icon-button color="warn" (click)="submit(car)">
           <mat-icon>check_circle_outline</mat-icon>
         </button>
       </mat-list-item>

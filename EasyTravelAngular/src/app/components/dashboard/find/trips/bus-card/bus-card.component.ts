@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BusService } from 'src/app/services';
 import { Time } from '@angular/common';
-import { BusTrip, Request } from 'src/app/models';
+import { BusTrip, Request, BaseTrip, TripType } from 'src/app/models';
 
 @Component({
   selector: 'app-bus-card',
@@ -11,6 +11,8 @@ import { BusTrip, Request } from 'src/app/models';
 export class BusCardComponent implements OnInit {
 
   constructor(private busService: BusService) { }
+
+  @Output() submitButton = new EventEmitter();
   @Input() from: string;
   @Input() to: string;
   @Input() date: Date;
@@ -34,5 +36,12 @@ export class BusCardComponent implements OnInit {
       console.log(buses);
       this.buses = buses;
     })
+  }
+
+  submit(bus: BusTrip) {
+    var trip = new BaseTrip();
+    trip.type = TripType.Bus;
+    trip.bus = bus;
+    this.submitButton.emit(trip);
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Time } from '@angular/common';
+import { Car } from 'src/app/models/blaBlaCar/car';
+import { BaseTrip } from 'src/app/models';
 
 @Component({
   selector: 'app-trips',
@@ -13,6 +15,7 @@ export class TripsComponent implements OnInit {
   @Input() time: Time;
   startLocation: string;
   finishLocation: string;
+  trips: BaseTrip[] = [];
 
   constructor() { }
 
@@ -23,5 +26,8 @@ export class TripsComponent implements OnInit {
     this.locations.splice(this.locations.length - 1, 1);
   }
 
+  submit(trip: BaseTrip) {
+    this.trips.push(trip);
+  }
 
 }

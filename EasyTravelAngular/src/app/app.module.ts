@@ -32,7 +32,8 @@ import {
   LoadingComponent,
   RailwayCardComponent,
   BlaBlaCarCardComponent,
-  BusCardComponent
+  BusCardComponent,
+  TripCardComponent
 } from './components/';
 
 import { 
@@ -52,7 +53,8 @@ import {
     LoadingComponent,
     RailwayCardComponent,
     BlaBlaCarCardComponent,
-    BusCardComponent
+    BusCardComponent,
+    TripCardComponent
   ],
   imports: [
     BrowserModule,

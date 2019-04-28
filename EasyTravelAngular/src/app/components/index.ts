@@ -6,3 +6,4 @@ export { LoadingComponent } from "./dashboard/find/loading/loading.component";
 export { BlaBlaCarCardComponent } from "./dashboard/find/trips/bla-bla-car-card/bla-bla-car-card.component";
 export { BusCardComponent } from "./dashboard/find/trips/bus-card/bus-card.component";
 export { RailwayCardComponent } from "./dashboard/find/trips/railway-card/railway-card.component";
+export { TripCardComponent } from "./dashboard/find/trips/trip-card/trip-card.component";

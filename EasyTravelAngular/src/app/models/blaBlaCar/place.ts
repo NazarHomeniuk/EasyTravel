@@ -1,7 +1,7 @@
 export class Place {
-    cityName: string;
+    city_name: string = undefined;
     address: string;
     latitude: string;
     longitude: string;
-    countryCode: string;
+    country_code: string = undefined;
 }

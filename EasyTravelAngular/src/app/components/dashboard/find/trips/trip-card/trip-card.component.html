@@ -1,0 +1,73 @@
+<mat-card>
+  <div class="card" fxLayout="column" fxLayoutAlign="center center">
+    <div *ngIf="trip.type == 0" fxLayout="column" fxLayoutAlign="center center">
+      <mat-card-title>
+        <mat-icon>train</mat-icon>
+        {{trip.train.from.station}} - {{trip.train.to.station}}
+      </mat-card-title>
+      <mat-card-subtitle>Потяг</mat-card-subtitle>
+      <mat-card-content>
+        <div class="content" fxLayout="column" fxLayoutAlign="center center">
+          <h4 matLine>
+            {{trip.train.num}} {{trip.train.from.stationTrain}} - {{trip.train.to.stationTrain}}
+          </h4>
+          <h4 matLine>
+            {{trip.train.from.date}} {{trip.train.from.time}}
+          </h4>
+        </div>
+      </mat-card-content>
+    </div>
+    <div *ngIf="trip.type == 1" fxLayout="column" fxLayoutAlign="center center">
+      <mat-card-title>
+        <mat-icon>directions_bus</mat-icon>
+        {{trip.bus.from}} - {{trip.bus.to}}
+      </mat-card-title>
+      <mat-card-subtitle>Автобус</mat-card-subtitle>
+      <mat-card-content>
+        <div class="content" fxLayout="column" fxLayoutAlign="center center">
+          <h4 matLine>
+            {{trip.bus.busName}}
+          </h4>
+          <h4 matLine>
+            {{trip.bus.date}} {{trip.bus.departureTime}}
+          </h4>
+          <h4 matLine>
+            Відстань: {{trip.bus.distance}} км
+          </h4>
+          <h4 matLine>
+            Ціна: {{trip.bus.price}} грн
+          </h4>
+        </div>
+      </mat-card-content>
+    </div>
+    <div *ngIf="trip.type == 2" fxLayout="column" fxLayoutAlign="center center">
+      <mat-card-title>
+        <mat-icon>directions_car</mat-icon>
+        {{trip.car.departure_place.city_name}} - {{trip.car.arrival_place.city_name}}
+      </mat-card-title>
+      <mat-card-subtitle>Попутник</mat-card-subtitle>
+      <mat-card-content>
+        <div class="content" fxLayout="column" fxLayoutAlign="center center">
+          <h4 matLine>
+            Автомобіль: {{trip.car.car.make}} {{trip.car.car.model}}
+          </h4>
+          <h4 matLine>
+            Місць: {{trip.car.seats_left}}
+          </h4>
+          <h4 matLine>
+            Ціна: {{trip.car.price.value}} грн
+          </h4>
+          <h4 matLine>
+            Тривалість: {{trip.car.duration.value / 3600}} год
+          </h4>
+          <h4 matLine>
+            Відстань: {{trip.car.distance.value}} км
+          </h4>
+        </div>
+      </mat-card-content>
+    </div>
+    <mat-card-actions fxLayout="column" fxLayoutAlign="end center">
+      <button mat-flat-button color="warn">Забронювати</button>
+    </mat-card-actions>
+  </div>
+</mat-card>

@@ -7,14 +7,14 @@ import { Car } from './car';
 
 export class Trip {
     links: Links;
-    departureDate: Date;
-    departurePlace: Place;
-    arrivalPlace: Place;
+    departure_date: Date;
+    departure_place: Place;
+    arrival_place: Place;
     price: Price;
-    seatsLeft: number;
+    seats_left: number;
     seats: number;
     duration: Duration;
     distance: Distance;
     car: Car;
-    locationsToDisplay: string[];
+    locations_to_display: string[];
 }

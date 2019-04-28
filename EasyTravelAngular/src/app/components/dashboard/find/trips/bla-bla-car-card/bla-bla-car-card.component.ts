@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Trip, Request } from 'src/app/models';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Trip, Request, BaseTrip, TripType } from 'src/app/models';
 import { BlaBlaCarService } from 'src/app/services';
 import { Time } from '@angular/common';
+import { Car } from 'src/app/models/blaBlaCar/car';
 
 @Component({
   selector: 'app-bla-bla-car-card',
@@ -11,6 +12,8 @@ import { Time } from '@angular/common';
 export class BlaBlaCarCardComponent implements OnInit {
 
   constructor(private blaBlaCarService: BlaBlaCarService) { }
+
+  @Output() submitButton = new EventEmitter();
   @Input() from: string;
   @Input() to: string;
   @Input() date: Date;
@@ -34,6 +37,13 @@ export class BlaBlaCarCardComponent implements OnInit {
       this.isLoading = false;
       console.log(this.cars);
     })
+  }
+
+  submit(car: Trip) {
+    var trip = new BaseTrip();
+    trip.type = TripType.BlaBlaCar;
+    trip.car = car;
+    this.submitButton.emit(trip);
   }
 
 }
