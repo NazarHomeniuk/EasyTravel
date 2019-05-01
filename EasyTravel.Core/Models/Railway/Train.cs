@@ -75,6 +75,10 @@ namespace EasyTravel.Core.Models.Railway
         [JsonProperty("noReserve")]
         public int NoReserve { get; set; }
 
+        [DataMember]
+        [JsonProperty("bookingLink")]
+        public string BookingLink { get; set; }
+
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();

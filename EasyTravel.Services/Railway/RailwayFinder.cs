@@ -18,12 +18,15 @@ namespace EasyTravel.Services.Railway
         private readonly IDateFormatter dateFormatter;
         private readonly RailwayConfig config;
         private readonly IMapsService mapsService;
+        private readonly ILinkBuilder linkBuilder;
 
-        public RailwayFinder(IHttpService httpService, IDateFormatter dateFormatter, IOptions<RailwayConfig> options, IMapsService mapsService)
+        public RailwayFinder(IHttpService httpService, IDateFormatter dateFormatter, IOptions<RailwayConfig> options,
+            IMapsService mapsService, ILinkBuilder linkBuilder)
         {
             this.httpService = httpService;
             this.dateFormatter = dateFormatter;
             this.mapsService = mapsService;
+            this.linkBuilder = linkBuilder;
             config = options.Value;
         }
 
@@ -50,6 +53,7 @@ namespace EasyTravel.Services.Railway
                 train.DepartureDate = departure;
                 var arrival = train.ArrivalDate.AddTicks(long.Parse(train.To.SortTime));
                 train.ArrivalDate = arrival;
+                train.BookingLink = linkBuilder.BuildRailwayLink(train);
             }
 
             return result.Data.List;

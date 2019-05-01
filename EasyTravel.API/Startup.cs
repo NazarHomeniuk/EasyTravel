@@ -41,6 +41,7 @@ namespace EasyTravel.API
             services.AddTransient<IDateFormatter, DateFormatter>();
             services.AddTransient<IHttpService, HttpService>();
             services.AddTransient<IMapsService, MapsService>();
+            services.AddTransient<ILinkBuilder, LinkBuilder>();
 
             services.AddDbContext<DataContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:EasyTravel"],
                 b => b.MigrationsAssembly("EasyTravel.Core")));

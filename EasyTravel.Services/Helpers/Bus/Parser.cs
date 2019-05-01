@@ -69,6 +69,12 @@ namespace EasyTravel.Services.Helpers.Bus
             var result = new Trip();
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(html);
+            var hidden = htmlDoc.DocumentNode.Descendants("span").ToArray();
+            result.BusCode = hidden[1].InnerHtml;
+            result.LocalPointFrom = hidden[2].InnerHtml;
+            result.LocalPointTo = hidden[3].InnerHtml;
+            hidden = htmlDoc.DocumentNode.Descendants("input").ToArray();
+            result.RoundNum = hidden[0].Attributes["value"].Value;
             var descendants = htmlDoc.DocumentNode.Descendants("small").ToArray();
             result.From = descendants[0].InnerHtml.Replace("\n", "").Replace(" ", "");
             result.To = descendants[2].InnerHtml.Replace("\n", "").Replace(" ", "");

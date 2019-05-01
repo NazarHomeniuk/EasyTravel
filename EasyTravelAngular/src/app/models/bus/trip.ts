@@ -11,4 +11,5 @@ export class BusTrip {
     distance: number;
     price: number;
     busName: string;
+    bookingLink: string;
 }

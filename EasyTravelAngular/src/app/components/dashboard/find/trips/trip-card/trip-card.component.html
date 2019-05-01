@@ -16,6 +16,9 @@
           </h4>
         </div>
       </mat-card-content>
+      <mat-card-actions fxLayout="column" fxLayoutAlign="end center">
+        <a href="{{trip.train.bookingLink}}" target="_blank" mat-flat-button color="warn">Забронювати</a>
+      </mat-card-actions>
     </div>
     <div *ngIf="trip.type == 1" fxLayout="column" fxLayoutAlign="center center">
       <mat-card-title>
@@ -39,6 +42,9 @@
           </h4>
         </div>
       </mat-card-content>
+      <mat-card-actions fxLayout="column" fxLayoutAlign="end center">
+        <a href="{{trip.bus.bookingLink}}" target="_blang" mat-flat-button color="warn">Забронювати</a>
+      </mat-card-actions>
     </div>
     <div *ngIf="trip.type == 2" fxLayout="column" fxLayoutAlign="center center">
       <mat-card-title>
@@ -65,9 +71,9 @@
           </h4>
         </div>
       </mat-card-content>
+      <mat-card-actions fxLayout="column" fxLayoutAlign="end center">
+        <a href="{{trip.car.links._front}}" target="_blank" mat-flat-button color="warn">Забронювати</a>
+      </mat-card-actions>
     </div>
-    <mat-card-actions fxLayout="column" fxLayoutAlign="end center">
-      <button mat-flat-button color="warn">Забронювати</button>
-    </mat-card-actions>
   </div>
 </mat-card>

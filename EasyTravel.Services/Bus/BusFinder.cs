@@ -17,14 +17,16 @@ namespace EasyTravel.Services.Bus
         private readonly IHttpService httpService;
         private readonly IDateFormatter dateFormatter;
         private readonly IMapsService mapsService;
+        private readonly ILinkBuilder linkBuilder;
         private readonly BusConfig config;
         private readonly IEnumerable<Station> availableStations;
 
-        public BusFinder(IHttpService httpService, IDateFormatter dateFormatter, IOptions<BusConfig> options, IMapsService mapsService)
+        public BusFinder(IHttpService httpService, IDateFormatter dateFormatter, IOptions<BusConfig> options, IMapsService mapsService, ILinkBuilder linkBuilder)
         {
             this.httpService = httpService;
             this.dateFormatter = dateFormatter;
             this.mapsService = mapsService;
+            this.linkBuilder = linkBuilder;
             config = options.Value;
             availableStations = GetAvailableStations().Result;
         }
@@ -42,6 +44,12 @@ namespace EasyTravel.Services.Bus
             var response = await httpService.MakeGetRequestAsync(url, headers);
             var responseString = await new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException()).ReadToEndAsync();
             var result = Parser.ParseTrips(responseString).ToList();
+            result.ForEach(t =>
+            {
+                t.FromCode = fromCode;
+                t.ToCode = toCode;
+                t.BookingLink = linkBuilder.BuildBusLink(t);
+            });
             result.RemoveAll(t => t.DepartureDate < departureDate);
             return result;
         }

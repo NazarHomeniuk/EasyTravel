@@ -19,4 +19,5 @@ export class Train {
     isEurope: number;
     allowPrivilege: number;
     noReserve: number;
+    bookingLink: string;
 }

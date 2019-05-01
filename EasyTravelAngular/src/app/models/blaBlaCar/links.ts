@@ -1,4 +1,4 @@
 export class Links {
-    self: string;
-    front: string;
+    _self: string;
+    _front: string;
 }

@@ -7,6 +7,18 @@ namespace EasyTravel.Core.Models.Bus
     {
         public string From { get; set; }
 
+        public string FromCode { get; set; }
+
+        public string ToCode { get; set; }
+
+        public string BusCode { get; set; }
+
+        public string LocalPointFrom { get; set; }
+
+        public string LocalPointTo { get; set; }
+
+        public string RoundNum { get; set; }
+
         public string To { get; set; }
 
         public TimeSpan DepartureTime { get; set; }
@@ -24,5 +36,7 @@ namespace EasyTravel.Core.Models.Bus
         public double Price { get; set; }
 
         public string BusName { get; set; }
+
+        public string BookingLink { get; set; }
     }
 }
