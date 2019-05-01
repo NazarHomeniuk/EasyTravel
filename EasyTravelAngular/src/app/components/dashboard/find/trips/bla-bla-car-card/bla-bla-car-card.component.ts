@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Trip, Request, BaseTrip, TripType } from 'src/app/models';
 import { BlaBlaCarService } from 'src/app/services';
 import { Time } from '@angular/common';
-import { Car } from 'src/app/models/blaBlaCar/car';
 
 @Component({
   selector: 'app-bla-bla-car-card',
@@ -20,12 +19,14 @@ export class BlaBlaCarCardComponent implements OnInit {
   @Input() time: Time;
   cars: Trip[];
   isLoading = true;
+  isOpened = false;
 
   ngOnInit() {
   }
 
   carPanelClick() {
     if (this.cars != null) return;
+    this.isOpened = true;
     var request = new Request();
     request.from = this.from;
     request.to = this.to;
@@ -39,10 +40,28 @@ export class BlaBlaCarCardComponent implements OnInit {
     })
   }
 
+  refresh(from: string, to: string, date: Date, time: Time) {
+    this.from = from;
+    this.to = to;
+    this.date = date;
+    if (!this.isOpened) return;
+    this.isLoading = true;
+    var request = new Request();
+    request.from = this.from;
+    request.to = this.to;
+    request.date = this.date;
+    this.blaBlaCarService.getAllCars(request).subscribe(cars => {
+      this.cars = cars;
+      this.isLoading = false;
+      console.log(this.cars);
+    })
+  }
+
   submit(car: Trip) {
     var trip = new BaseTrip();
     trip.type = TripType.BlaBlaCar;
     trip.car = car;
+    this.cars.length = 0;
     this.submitButton.emit(trip);
   }
 

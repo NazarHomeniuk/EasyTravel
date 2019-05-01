@@ -28,8 +28,12 @@ export class FindComponent implements OnInit {
       this.isLoading = false;
       this.isFound = true;
       this.locationsBetween = locations;
-      this.date = values.date;
       this.time = values.time;
+      let hours = this.time.toString().split(':')[0];
+      let minutes = this.time.toString().split(':')[1];
+      this.date = values.date;
+      this.date.setHours(+hours);
+      this.date.setMinutes(+minutes);
     });
   }
 }

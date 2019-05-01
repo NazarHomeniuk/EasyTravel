@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using System.Text;
 using EasyTravel.Contracts.Interfaces;
 using Newtonsoft.Json;
@@ -15,6 +16,16 @@ namespace EasyTravel.Core.Models.Railway
         [DataMember]
         [JsonProperty("category")]
         public int Category { get; set; }
+
+
+        [DataMember]
+        [JsonProperty("departureDate")]
+        public DateTime DepartureDate { get; set; }
+
+
+        [DataMember]
+        [JsonProperty("arrivalDate")]
+        public DateTime ArrivalDate { get; set; }
 
         [DataMember]
         [JsonProperty("isTransformer")]

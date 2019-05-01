@@ -89,6 +89,8 @@ namespace EasyTravel.Services.Helpers.Bus
             var distance = descendants[4].InnerText;
             int.TryParse(distance, out var distanceResult);
             result.Distance = distanceResult;
+            result.DepartureDate = result.Date.Add(result.DepartureTime);
+            result.ArrivalDate = result.Date.Add(result.ArrivalTime);
             return result;
         }
     }

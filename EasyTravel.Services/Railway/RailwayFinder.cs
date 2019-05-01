@@ -27,7 +27,7 @@ namespace EasyTravel.Services.Railway
             config = options.Value;
         }
 
-        public async Task<IEnumerable<ITrip>> FindTripsAsync(string from, string to, DateTime departureDate, TimeSpan departureTime)
+        public async Task<IEnumerable<ITrip>> FindTripsAsync(string from, string to, DateTime departureDate)
         {
             var fromStation = await GetStationsInfo(from);
             var toStation = await GetStationsInfo(to);
@@ -39,21 +39,29 @@ namespace EasyTravel.Services.Railway
             var data = $"from={fromStation.First().Value}";
             data += $"&to={toStation.First().Value}";
             data += $"&date={dateFormatter.RailwayDate(departureDate)}";
-            data += $"&time={dateFormatter.RailwayTime(departureTime)}";
+            data += $"&time={dateFormatter.RailwayTime(departureDate)}";
             var response = await httpService.MakePostRequestAsync(config.ApiUrl, data);
             var responseString = await new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException()).ReadToEndAsync();
             var result = JsonConvert.DeserializeObject<TrainsInfo>(responseString);
             result.Data.List.RemoveAll(i => i.Types.Length == 0);
+            foreach (var train in result.Data.List)
+            {
+                var departure = train.DepartureDate.AddTicks(long.Parse(train.From.SortTime));
+                train.DepartureDate = departure;
+                var arrival = train.ArrivalDate.AddTicks(long.Parse(train.To.SortTime));
+                train.ArrivalDate = arrival;
+            }
+
             return result.Data.List;
         }
 
-        public async Task<IEnumerable<ITrip>> FindAllTripsAsync(string @from, string to, DateTime departureDate, TimeSpan departureTime)
+        public async Task<IEnumerable<ITrip>> FindAllTripsAsync(string @from, string to, DateTime departureDate)
         {
             var trains = new List<ITrip>();
             var locations = (await mapsService.FindLocationsBetweenAsync(from, to)).ToList();
-            for (var i = 1; i < locations.Count; ++i)
+            for (var i = locations.Count - 1; i >= 1; --i)
             {
-                var result = await FindTripsAsync(from, locations[i], departureDate, departureTime);
+                var result = await FindTripsAsync(from, locations[i], departureDate);
                 trains.AddRange(result);
             }
 

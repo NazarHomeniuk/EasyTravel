@@ -4,9 +4,9 @@ namespace EasyTravel.Contracts.Interfaces
 {
     public interface IDateFormatter
     {
-        string BlaBlaCarDate(DateTime date, TimeSpan time);
+        string BlaBlaCarDate(DateTime date);
         string RailwayDate(DateTime date);
-        string RailwayTime(TimeSpan time);
+        string RailwayTime(DateTime time);
         string BusDate(DateTime date);
     }
 }

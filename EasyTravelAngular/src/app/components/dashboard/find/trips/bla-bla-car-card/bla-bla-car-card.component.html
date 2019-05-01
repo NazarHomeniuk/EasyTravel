@@ -1,5 +1,5 @@
 <mat-accordion>
-  <mat-expansion-panel (opened)="carPanelClick()">
+  <mat-expansion-panel #panel (opened)="carPanelClick()">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{from}}
@@ -17,9 +17,9 @@
         <mat-icon matListIcon>directions_car</mat-icon>
         <h3 matLine>{{car.departure_place.city_name}} - {{car.arrival_place.city_name}}</h3>
         <p matLine>
-          <span>{{car.departure_date}}</span>
+          <span>{{car.departure_date.toString()}}</span>
         </p>
-        <button mat-icon-button color="warn" (click)="submit(car)">
+        <button mat-icon-button color="warn" (click)="submit(car);">
           <mat-icon>check_circle_outline</mat-icon>
         </button>
       </mat-list-item>

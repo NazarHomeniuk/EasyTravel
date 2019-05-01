@@ -19,12 +19,14 @@ export class BusCardComponent implements OnInit {
   @Input() time: Time;
   buses: BusTrip[];
   isLoading = true;
+  isOpened = false;
 
   ngOnInit() {
   }
 
   busPanelClick() {
     if (this.buses != null) return;
+    this.isOpened = true;
     var request = new Request();
     request.from = this.from;
     request.to = this.to;
@@ -38,10 +40,29 @@ export class BusCardComponent implements OnInit {
     })
   }
 
+  refresh(from: string, to: string, date: Date, time: Time) {
+    this.from = from;
+    this.to = to;
+    this.date = date;
+    if (!this.isOpened) return;
+    this.isLoading = true;
+    var request = new Request();
+    request.from = this.from;
+    request.to = this.to;
+    request.date = this.date;
+    console.log(request);
+    this.busService.getAllBuses(request).subscribe(buses => {
+      this.buses = buses;
+      this.isLoading = false;
+      console.log(this.buses);
+    })
+  }
+
   submit(bus: BusTrip) {
     var trip = new BaseTrip();
     trip.type = TripType.Bus;
     trip.bus = bus;
     this.submitButton.emit(trip);
+    this.buses.length = 0;
   }
 }

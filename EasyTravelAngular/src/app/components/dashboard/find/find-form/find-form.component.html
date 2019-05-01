@@ -39,7 +39,7 @@
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>Час відправлення</mat-label>
-                <input matInput [disableClick]="true"  [min]="minTime" [formControl]="timeInput" placeholder="Час відправлення" [ngxTimepicker]="fullTime" [format]="24" readonly>
+                <input matInput type="time" [disableClick]="true" [formControl]="timeInput" placeholder="Час відправлення" [ngxTimepicker]="fullTime" [format]="24" readonly>
                 <ngx-material-timepicker-toggle matSuffix [for]="fullTime">access_time</ngx-material-timepicker-toggle>
                 <ngx-material-timepicker #fullTime></ngx-material-timepicker>
                 <mat-hint>Hint</mat-hint>

@@ -5,9 +5,9 @@ namespace EasyTravel.Services.Helpers
 {
     public class DateFormatter : IDateFormatter
     {
-        public string BlaBlaCarDate(DateTime date, TimeSpan time)
+        public string BlaBlaCarDate(DateTime date)
         {
-            var timeString = time.ToString("hh':'mm':'ss");
+            var timeString = date.ToString("HH':'mm':'ss");
             var dateString = date.ToString("yyyy-MM-dd");
             return $"{dateString} {timeString}";
         }
@@ -17,9 +17,9 @@ namespace EasyTravel.Services.Helpers
             return date.ToString("yyyy-MM-dd");
         }
 
-        public string RailwayTime(TimeSpan time)
+        public string RailwayTime(DateTime date)
         {
-            return time.ToString("hh':'mm");
+            return date.ToString("HH':'mm");
         }
 
         public string BusDate(DateTime date)

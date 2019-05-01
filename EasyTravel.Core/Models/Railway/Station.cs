@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 
 namespace EasyTravel.Core.Models.Railway
@@ -24,7 +25,7 @@ namespace EasyTravel.Core.Models.Railway
 
         [DataMember]
         [JsonProperty("time")]
-        public string Time { get; set; }
+        public TimeSpan Time { get; set; }
 
         [DataMember]
         [JsonProperty("sortTime")]
@@ -32,7 +33,7 @@ namespace EasyTravel.Core.Models.Railway
 
         [DataMember]
         [JsonProperty("srcDate")]
-        public string SrcDate { get; set; }
+        public DateTime SrcDate { get; set; }
 
         public override string ToString()
         {

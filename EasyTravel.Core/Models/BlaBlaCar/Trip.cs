@@ -10,6 +10,8 @@ namespace EasyTravel.Core.Models.BlaBlaCar
         public Links Links { get; set; }
         [JsonProperty("departure_date")]
         public DateTime DepartureDate { get; set; }
+        [JsonProperty("arrival_date")]
+        public DateTime ArrivalDate { get; set; }
         [JsonProperty("departure_place")]
         public Place DeparturePlace { get; set; }
         [JsonProperty("arrival_place")]

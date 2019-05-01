@@ -17,7 +17,6 @@ export class FindFormComponent implements OnInit {
   timeInput = new FormControl();
 
   minDate = new Date(Date.now());
-  minTime = `${new Date(Date.now()).getHours()}:${new Date(Date.now()).getMinutes()}`;
   @Output() submitButton = new EventEmitter();
   
   options: Observable<string[]>;

@@ -29,7 +29,7 @@ namespace EasyTravel.Services.Bus
             availableStations = GetAvailableStations().Result;
         }
 
-        public async Task<IEnumerable<ITrip>> FindTripsAsync(string from, string to, DateTime departureDate, TimeSpan departureTime)
+        public async Task<IEnumerable<ITrip>> FindTripsAsync(string from, string to, DateTime departureDate)
         {
             var fromCode = availableStations.Select(i => i).FirstOrDefault(i => i.Location == from.ToUpper())?.Code;
             var toCode = availableStations.Select(i => i).FirstOrDefault(i => i.Location == to.ToUpper())?.Code;
@@ -41,17 +41,18 @@ namespace EasyTravel.Services.Bus
             };
             var response = await httpService.MakeGetRequestAsync(url, headers);
             var responseString = await new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException()).ReadToEndAsync();
-            var result = Parser.ParseTrips(responseString);
+            var result = Parser.ParseTrips(responseString).ToList();
+            result.RemoveAll(t => t.DepartureDate < departureDate);
             return result;
         }
 
-        public async Task<IEnumerable<ITrip>> FindAllTripsAsync(string @from, string to, DateTime departureDate, TimeSpan departureTime)
+        public async Task<IEnumerable<ITrip>> FindAllTripsAsync(string @from, string to, DateTime departureDate)
         {
             var buses = new List<ITrip>();
             var locations = (await mapsService.FindLocationsBetweenAsync(from, to)).ToList();
-            for (var i = 1; i < locations.Count; ++i)
+            for (var i = locations.Count - 1; i >= 1; --i)
             {
-                var result = await FindTripsAsync(from, locations[i], departureDate, departureTime);
+                var result = await FindTripsAsync(from, locations[i], departureDate);
                 buses.AddRange(result);
             }
 

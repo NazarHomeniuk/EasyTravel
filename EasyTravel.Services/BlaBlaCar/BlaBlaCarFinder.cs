@@ -28,9 +28,9 @@ namespace EasyTravel.Services.BlaBlaCar
             config = options.Value;
         }
 
-        public async Task<IEnumerable<ITrip>> FindTripsAsync(string from, string to, DateTime departureDate, TimeSpan departureTime)
+        public async Task<IEnumerable<ITrip>> FindTripsAsync(string from, string to, DateTime departureDate)
         {
-            var date = dateFormatter.BlaBlaCarDate(departureDate, departureTime);
+            var date = dateFormatter.BlaBlaCarDate(departureDate);
             var url = config.ApiUrl.Replace("{from}", from).Replace("{to}", to).Replace("{date}", date);
             var headers = new WebHeaderCollection
             {
@@ -41,16 +41,21 @@ namespace EasyTravel.Services.BlaBlaCar
             const string format = "dd/MM/yyyy HH:mm:ss";
             var dateTimeConverter = new IsoDateTimeConverter { DateTimeFormat = format };
             var data = JsonConvert.DeserializeObject<Trips>(responseString, dateTimeConverter);
+            foreach (var trip in data.AvailableTrips)
+            {
+                trip.ArrivalDate = trip.DepartureDate.AddSeconds((double)trip.Duration.Value);
+            }
+
             return data.AvailableTrips;
         }
 
-        public async Task<IEnumerable<ITrip>> FindAllTripsAsync(string @from, string to, DateTime departureDate, TimeSpan departureTime)
+        public async Task<IEnumerable<ITrip>> FindAllTripsAsync(string @from, string to, DateTime departureDate)
         {
             var cars = new List<ITrip>();
             var locations = (await mapsService.FindLocationsBetweenAsync(from, to)).ToList();
-            for (var i = 1; i < locations.Count; ++i)
+            for (var i = locations.Count - 1; i >= 1; --i)
             {
-                var result = await FindTripsAsync(from, locations[i], departureDate, departureTime);
+                var result = await FindTripsAsync(from, locations[i], departureDate);
                 cars.AddRange(result);
             }
 

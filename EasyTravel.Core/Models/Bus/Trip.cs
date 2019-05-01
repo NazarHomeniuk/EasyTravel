@@ -15,6 +15,10 @@ namespace EasyTravel.Core.Models.Bus
 
         public DateTime Date { get; set; }
 
+        public DateTime DepartureDate { get; set; }
+
+        public DateTime ArrivalDate { get; set; }
+
         public int Distance { get; set; }
 
         public double Price { get; set; }

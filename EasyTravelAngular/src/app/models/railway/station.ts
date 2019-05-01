@@ -1,9 +1,11 @@
+import { Time } from '@angular/common';
+
 export class Station {
     code: string;
-    stationName: string;
+    station: string;
     stationTrain: string;
     date: string;
-    time: string;
+    time: Time;
     sortTime: string;
-    srcDate: string;
+    srcDate: Date;
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +23,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { AmazingTimePickerModule } from 'amazing-time-picker';
 
 import { 
   DashboardComponent,
@@ -78,7 +79,8 @@ import {
     MatStepperModule,
     MatExpansionModule,
     MatNativeDateModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    AmazingTimePickerModule
      
   ],
   providers: [
@@ -87,7 +89,8 @@ import {
     BlaBlaCarService,
     BusService,
     MatDatepickerModule,
-    { provide: MAT_DATE_LOCALE, useValue: 'uk-UA' } 
+    { provide: MAT_DATE_LOCALE, useValue: 'uk-UA' },
+    { provide: LOCALE_ID, useValue: 'uk-UA' } 
   ],
   bootstrap: [AppComponent]
 })
