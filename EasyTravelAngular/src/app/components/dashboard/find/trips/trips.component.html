@@ -22,7 +22,10 @@
             <h1>{{finishLocation}}</h1>
         </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="space-around start">
-        <app-trip-card *ngFor="let trip of trips" [trip]="trip"></app-trip-card>
+    <div fxLayout="row" fxLayoutAlign="space-evenly start">
+        <div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let trip of trips; let i = index">
+            <app-trip-card [trip]="trip"></app-trip-card>
+            <span>{{waitTime[i]}}</span>
+        </div>
     </div>
 </div>

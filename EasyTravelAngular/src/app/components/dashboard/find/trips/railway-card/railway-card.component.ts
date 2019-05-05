@@ -45,6 +45,7 @@ export class RailwayCardComponent implements OnInit {
     this.to = to;
     this.date = date;
     if (!this.isOpened) return;
+    this.trains.length = 0;
     this.isLoading = true;
     var request = new Request();
     request.from = this.from;

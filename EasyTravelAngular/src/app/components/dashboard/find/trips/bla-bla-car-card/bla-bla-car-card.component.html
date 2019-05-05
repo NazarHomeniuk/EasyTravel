@@ -17,8 +17,12 @@
         <mat-icon matListIcon>directions_car</mat-icon>
         <h3 matLine>{{car.departure_place.city_name}} - {{car.arrival_place.city_name}}</h3>
         <p matLine>
-          <span>{{car.departure_date.toString()}}</span>
+          <span>{{car.departure_date| date:'dd.MM.yyyy HH:mm'}}</span>
         </p>
+        <div fxLayout="row" fxLayoutAlign="center start" dir="ltr">
+          <span class="type">{{car.price.value}}</span>
+          <span class="type">&nbsp;грн</span>
+      </div>
         <button mat-icon-button color="warn" (click)="submit(car);">
           <mat-icon>check_circle_outline</mat-icon>
         </button>

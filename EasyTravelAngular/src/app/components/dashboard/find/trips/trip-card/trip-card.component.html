@@ -7,13 +7,19 @@
       </mat-card-title>
       <mat-card-subtitle>Потяг</mat-card-subtitle>
       <mat-card-content>
-        <div class="content" fxLayout="column" fxLayoutAlign="center center">
-          <h4 matLine>
-            {{trip.train.num}} {{trip.train.from.stationTrain}} - {{trip.train.to.stationTrain}}
-          </h4>
-          <h4 matLine>
-            {{trip.train.from.date}} {{trip.train.from.time}}
-          </h4>
+        <div class="content" fxLayout="column" fxLayoutAlign="start start">
+          <label class="mat-body">
+            {{trip.train.num}} <strong>{{trip.train.from.stationTrain}} - {{trip.train.to.stationTrain}}</strong>
+          </label>
+          <label class="mat-body">
+            Дата відпралення: <strong>{{trip.train.departureDate | date:'dd.MM.yyyy HH:mm'}}</strong>
+          </label>
+          <label class="mat-body">
+            Дата прибуття: <strong>{{trip.train.arrivalDate | date:'dd.MM.yyyy HH:mm'}}</strong>
+          </label>
+          <label class="mat-body">
+            Час подорожі: <strong>{{trip.train.travelTime}}</strong>
+          </label>
         </div>
       </mat-card-content>
       <mat-card-actions fxLayout="column" fxLayoutAlign="end center">
@@ -27,19 +33,19 @@
       </mat-card-title>
       <mat-card-subtitle>Автобус</mat-card-subtitle>
       <mat-card-content>
-        <div class="content" fxLayout="column" fxLayoutAlign="center center">
-          <h4 matLine>
+        <div class="content" fxLayout="column" fxLayoutAlign="start start">
+          <label class="mat-body">
             {{trip.bus.busName}}
-          </h4>
-          <h4 matLine>
-            {{trip.bus.date}} {{trip.bus.departureTime}}
-          </h4>
-          <h4 matLine>
-            Відстань: {{trip.bus.distance}} км
-          </h4>
-          <h4 matLine>
-            Ціна: {{trip.bus.price}} грн
-          </h4>
+          </label>
+          <label class="mat-body">
+            Дата відпралення: <strong>{{trip.bus.departureDate | date:'dd.MM.yyyy HH:mm'}}</strong>
+          </label>
+          <label class="mat-body">
+            Дата прибуття: <strong>{{trip.bus.arrivalDate | date:'dd.MM.yyyy HH:mm'}}</strong>
+          </label>
+          <label class="mat-body">
+            Ціна: <strong>{{trip.bus.price}} грн</strong>
+          </label>
         </div>
       </mat-card-content>
       <mat-card-actions fxLayout="column" fxLayoutAlign="end center">
@@ -53,22 +59,25 @@
       </mat-card-title>
       <mat-card-subtitle>Попутник</mat-card-subtitle>
       <mat-card-content>
-        <div class="content" fxLayout="column" fxLayoutAlign="center center">
-          <h4 matLine>
+        <div class="content" fxLayout="column" fxLayoutAlign="start start">
+          <label class="mat-body">
             Автомобіль: {{trip.car.car.make}} {{trip.car.car.model}}
-          </h4>
-          <h4 matLine>
-            Місць: {{trip.car.seats_left}}
-          </h4>
-          <h4 matLine>
-            Ціна: {{trip.car.price.value}} грн
-          </h4>
-          <h4 matLine>
-            Тривалість: {{trip.car.duration.value / 3600}} год
-          </h4>
-          <h4 matLine>
-            Відстань: {{trip.car.distance.value}} км
-          </h4>
+          </label>
+          <label class="mat-body">
+            Дата відпралення: <strong>{{trip.car.departure_date | date:'dd.MM.yyyy HH:mm'}}</strong>
+          </label>
+          <label class="mat-body">
+            Дата прибуття: <strong>{{trip.car.arrival_date | date:'dd.MM.yyyy HH:mm'}}</strong>
+          </label>
+          <label class="mat-body">
+            Місць: <strong>{{trip.car.seats_left}}</strong>
+          </label>
+          <label class="mat-body">
+            Ціна: <strong>{{trip.car.price.value}} грн</strong>
+          </label>
+          <label class="mat-body">
+            Час подорожі: <strong>{{trip.car.duration.value / 3600 | number: '1.1-2'}} год</strong>
+          </label>
         </div>
       </mat-card-content>
       <mat-card-actions fxLayout="column" fxLayoutAlign="end center">

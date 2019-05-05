@@ -77,7 +77,9 @@ namespace EasyTravel.Services.Helpers.Bus
             result.RoundNum = hidden[0].Attributes["value"].Value;
             var descendants = htmlDoc.DocumentNode.Descendants("small").ToArray();
             result.From = descendants[0].InnerHtml.Replace("\n", "").Replace(" ", "");
+            result.From = char.ToUpperInvariant(result.From[0]) + result.From.Substring(1).ToLower();
             result.To = descendants[2].InnerHtml.Replace("\n", "").Replace(" ", "");
+            result.To = char.ToUpperInvariant(result.To[0]) + result.To.Substring(1).ToLower();
             result.BusName = descendants[4].InnerHtml.Replace("\n", "").Replace(" ", "");
             descendants = htmlDoc.DocumentNode.Descendants("b").ToArray();
             TimeSpan.TryParse(descendants[0].InnerHtml, out var departureTime);

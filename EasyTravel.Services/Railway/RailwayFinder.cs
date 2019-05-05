@@ -49,10 +49,10 @@ namespace EasyTravel.Services.Railway
             result.Data.List.RemoveAll(i => i.Types.Length == 0);
             foreach (var train in result.Data.List)
             {
-                var departure = train.DepartureDate.AddTicks(long.Parse(train.From.SortTime));
-                train.DepartureDate = departure;
-                var arrival = train.ArrivalDate.AddTicks(long.Parse(train.To.SortTime));
-                train.ArrivalDate = arrival;
+                train.DepartureDate = DateTime.Parse(train.From.Date.Split(',')[1]);
+                train.DepartureDate += train.From.Time;
+                train.ArrivalDate = DateTime.Parse(train.To.Date.Split(',')[1]);
+                train.ArrivalDate += train.To.Time;
                 train.BookingLink = linkBuilder.BuildRailwayLink(train);
             }
 

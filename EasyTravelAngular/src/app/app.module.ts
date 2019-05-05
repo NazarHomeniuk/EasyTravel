@@ -89,8 +89,7 @@ import {
     BlaBlaCarService,
     BusService,
     MatDatepickerModule,
-    { provide: MAT_DATE_LOCALE, useValue: 'uk-UA' },
-    { provide: LOCALE_ID, useValue: 'uk-UA' } 
+    { provide: MAT_DATE_LOCALE, useValue: 'uk-UA' }
   ],
   bootstrap: [AppComponent]
 })

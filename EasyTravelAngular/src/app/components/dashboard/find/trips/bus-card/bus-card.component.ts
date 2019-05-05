@@ -46,6 +46,7 @@ export class BusCardComponent implements OnInit {
     this.date = date;
     if (!this.isOpened) return;
     this.isLoading = true;
+    this.buses.length = 0;
     var request = new Request();
     request.from = this.from;
     request.to = this.to;

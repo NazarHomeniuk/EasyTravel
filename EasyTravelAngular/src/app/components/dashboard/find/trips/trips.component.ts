@@ -22,6 +22,7 @@ export class TripsComponent implements OnInit {
   startLocation: string;
   finishLocation: string;
   trips: BaseTrip[] = [];
+  waitTime: number[] = [];
   isDisabled = false;
 
   constructor() { }
@@ -34,7 +35,6 @@ export class TripsComponent implements OnInit {
   }
 
   submit(trip: BaseTrip) {
-    this.trips.push(trip);
     var from, to, date, time;
     console.log(trip);
     switch(trip.type) {
@@ -42,19 +42,34 @@ export class TripsComponent implements OnInit {
       from = trip.car.arrival_place.city_name;
       to = this.finishLocation;
       date = new Date(trip.car.arrival_date);
+      trip.arrivalDate = trip.car.arrival_date;
+      trip.departureDate = trip.car.departure_date;
       break;
       case TripType.Bus:
       from = trip.bus.to;
       to = this.finishLocation;
       date = new Date(trip.bus.arrivalDate);
+      trip.arrivalDate = trip.bus.arrivalDate;
+      trip.departureDate = trip.bus.departureDate;
       break;
       case TripType.Railway:
-      console.log(trip.train);
       from = trip.train.to.station;
       to = this.finishLocation;
-      date = new Date(trip.train.to.srcDate);
+      date = new Date(trip.train.arrivalDate);
+      trip.arrivalDate = trip.train.arrivalDate;
+      trip.departureDate = trip.train.departureDate;
       break;
     }
+
+    if (this.trips.length > 0) {
+      var previousTrip = this.trips[this.trips.length - 1];
+      console.log(previousTrip);
+      let time = Math.floor((new Date(trip.departureDate).getTime() - new Date(previousTrip.arrivalDate).getTime())  / 1000 / 60 / 60);
+      this.waitTime.push(time);
+      console.log(this.waitTime);
+    }
+
+    this.trips.push(trip);
 
     if (from.toLowerCase() == to.toLowerCase()) {
       this.isDisabled = true;

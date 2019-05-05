@@ -6,4 +6,6 @@ export class BaseTrip {
     train: Train;
     car: Trip;
     bus: BusTrip;
+    departureDate: Date;
+    arrivalDate: Date;
 }

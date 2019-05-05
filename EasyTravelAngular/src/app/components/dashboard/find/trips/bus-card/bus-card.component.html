@@ -17,8 +17,12 @@
                 <mat-icon matListIcon>directions_bus</mat-icon>
                 <h3 matLine>{{bus.from}} - {{bus.to}}</h3>
                 <p matLine>
-                    <span>{{bus.date}} {{bus.departureTime}}</span>
+                    <span>{{bus.departureDate | date:'dd.MM.yyyy HH:mm'}}</span>
                 </p>
+                <div fxLayout="row" fxLayoutAlign="center start" dir="ltr">
+                    <span class="type">{{bus.price}}</span>
+                    <span class="type">&nbsp;грн</span>
+                </div>
                 <button mat-icon-button color="warn" (click)="submit(bus)">
                     <mat-icon>check_circle_outline</mat-icon>
                 </button>
