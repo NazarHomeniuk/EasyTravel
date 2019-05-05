@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using EasyTravel.Contracts.Interfaces;
+using EasyTravel.Contracts.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasyTravel.API.Controllers

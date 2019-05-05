@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using EasyTravel.API.Models;
 using EasyTravel.Contracts.Interfaces;
+using EasyTravel.Contracts.Interfaces.Core;
+using EasyTravel.Contracts.Interfaces.Services;
 using EasyTravel.Services.BlaBlaCar;
 using Microsoft.AspNetCore.Mvc;
 

@@ -6,9 +6,11 @@ namespace EasyTravel.Core.Models.Railway
     [DataContract]
     public class Type
     {
+        public int Id { get; set; }
+
         [DataMember]
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string TypeId { get; set; }
 
         [DataMember]
         [JsonProperty("title")]
@@ -21,6 +23,10 @@ namespace EasyTravel.Core.Models.Railway
         [DataMember]
         [JsonProperty("places")]
         public uint Places { get; set; }
+
+        public Train Train { get; set; }
+
+        public int TrainId { get; set; }
 
         public override string ToString()
         {

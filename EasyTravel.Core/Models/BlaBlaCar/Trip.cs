@@ -1,11 +1,14 @@
 ﻿using System;
-using EasyTravel.Contracts.Interfaces;
+using System.ComponentModel.DataAnnotations.Schema;
+using EasyTravel.Contracts.Interfaces.Core;
+using EasyTravel.Core.Models.Monitoring;
 using Newtonsoft.Json;
 
 namespace EasyTravel.Core.Models.BlaBlaCar
 {
     public class Trip : ITrip
     {
+        public int Id { get; set; }
         [JsonProperty("links")]
         public Links Links { get; set; }
         [JsonProperty("departure_date")]
@@ -28,6 +31,9 @@ namespace EasyTravel.Core.Models.BlaBlaCar
         public Distance Distance { get; set; }
         [JsonProperty("car")]
         public Car Car { get; set; }
+        public BlaBlaCarMonitoring Monitoring;
+        public int BlaBlaCarMonitoringId { get; set; }
+        [NotMapped]
         [JsonProperty("locations_to_display")]
         public string[] LocationsToDisplay { get; set; }
     }

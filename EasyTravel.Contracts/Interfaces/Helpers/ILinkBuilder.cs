@@ -1,4 +1,6 @@
-﻿namespace EasyTravel.Contracts.Interfaces
+﻿using EasyTravel.Contracts.Interfaces.Core;
+
+namespace EasyTravel.Contracts.Interfaces.Helpers
 {
     public interface ILinkBuilder
     {

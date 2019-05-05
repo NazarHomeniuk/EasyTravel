@@ -1,10 +1,13 @@
 ﻿using System;
-using EasyTravel.Contracts.Interfaces;
+using EasyTravel.Contracts.Interfaces.Core;
+using EasyTravel.Core.Models.Monitoring;
 
 namespace EasyTravel.Core.Models.Bus
 {
     public class Trip : ITrip
     {
+        public int Id { get; set; }
+
         public string From { get; set; }
 
         public string FromCode { get; set; }
@@ -38,5 +41,9 @@ namespace EasyTravel.Core.Models.Bus
         public string BusName { get; set; }
 
         public string BookingLink { get; set; }
+
+        public BusMonitoring Monitoring { get; set; }
+
+        public int BusMonitoringId { get; set; }
     }
 }

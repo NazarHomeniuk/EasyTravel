@@ -4,6 +4,7 @@ namespace EasyTravel.Core.Models.BlaBlaCar
 {
     public class Price
     {
+        public int Id { get; set; }
         [JsonProperty("value")]
         public decimal Value { get; set; }
         [JsonProperty("currency")]

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EasyTravel.Contracts.Interfaces
+namespace EasyTravel.Contracts.Interfaces.Helpers
 {
     public interface IDateFormatter
     {

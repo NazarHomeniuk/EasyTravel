@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BingMapsRESTToolkit;
 using EasyTravel.Contracts.Interfaces;
+using EasyTravel.Contracts.Interfaces.Services;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Data;
 using Microsoft.Extensions.Options;

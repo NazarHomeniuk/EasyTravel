@@ -4,6 +4,7 @@ namespace EasyTravel.Core.Models.BlaBlaCar
 {
     public class Place
     {
+        public int Id { get; set; }
         [JsonProperty("city_name")]
         public string CityName { get; set; }
         [JsonProperty("address")]

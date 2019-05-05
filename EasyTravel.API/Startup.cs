@@ -1,12 +1,15 @@
-﻿using EasyTravel.Contracts.Interfaces;
+﻿using EasyTravel.Contracts.Interfaces.Helpers;
+using EasyTravel.Contracts.Interfaces.Services;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Data;
+using EasyTravel.HangFire.Services;
 using EasyTravel.Services.BingMaps;
 using EasyTravel.Services.BlaBlaCar;
 using EasyTravel.Services.Bus;
 using EasyTravel.Services.Helpers;
 using EasyTravel.Services.Http;
 using EasyTravel.Services.Railway;
+using Hangfire;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -34,17 +37,23 @@ namespace EasyTravel.API
             services.Configure<RailwayConfig>(Configuration.GetSection("Railway"));
             services.Configure<BusConfig>(Configuration.GetSection("Bus"));
             services.Configure<BingMapsConfig>(Configuration.GetSection("BingMaps"));
+            services.Configure<HangFireConfig>(Configuration.GetSection("HangFire"));
 
             services.AddTransient<BlaBlaCarFinder>();
             services.AddTransient<RailwayFinder>();
             services.AddTransient<BusFinder>();
+            services.AddTransient<RailwayMonitoringService>();
+            services.AddTransient<BusMonitoringService>();
+            services.AddTransient<BlaBlaCarMonitoringService>();
             services.AddTransient<IDateFormatter, DateFormatter>();
             services.AddTransient<IHttpService, HttpService>();
             services.AddTransient<IMapsService, MapsService>();
             services.AddTransient<ILinkBuilder, LinkBuilder>();
 
-            services.AddDbContext<DataContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:EasyTravel"],
+            var connectionString = Configuration["ConnectionString:EasyTravel"];
+            services.AddDbContext<DataContext>(opts => opts.UseSqlServer(connectionString,
                 b => b.MigrationsAssembly("EasyTravel.Core")));
+            services.AddHangfire(x => x.UseSqlServerStorage(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +74,8 @@ namespace EasyTravel.API
                 .AllowAnyHeader());
 
             app.UseHttpsRedirection();
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
             app.UseMvc();
         }
     }

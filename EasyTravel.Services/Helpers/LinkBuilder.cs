@@ -1,5 +1,7 @@
 ﻿using System.Text;
 using EasyTravel.Contracts.Interfaces;
+using EasyTravel.Contracts.Interfaces.Core;
+using EasyTravel.Contracts.Interfaces.Helpers;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Models.Railway;
 using Microsoft.Extensions.Options;

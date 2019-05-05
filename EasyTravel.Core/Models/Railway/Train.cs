@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 using EasyTravel.Contracts.Interfaces;
+using EasyTravel.Contracts.Interfaces.Core;
+using EasyTravel.Core.Models.Monitoring;
 using Newtonsoft.Json;
 
 namespace EasyTravel.Core.Models.Railway
@@ -9,6 +12,7 @@ namespace EasyTravel.Core.Models.Railway
     [DataContract]
     public class Train : ITrip
     {
+        public int Id { get; set; }
         [DataMember]
         [JsonProperty("num")]
         public string Num { get; set; }
@@ -45,7 +49,7 @@ namespace EasyTravel.Core.Models.Railway
 
         [DataMember]
         [JsonProperty("types")]
-        public Type[] Types { get; set; }
+        public IEnumerable<Type> Types { get; set; }
 
         [DataMember]
         [JsonProperty("child")]
@@ -78,6 +82,10 @@ namespace EasyTravel.Core.Models.Railway
         [DataMember]
         [JsonProperty("bookingLink")]
         public string BookingLink { get; set; }
+
+        public RailwayMonitoring Monitoring { get; set; }
+
+        public int RailwayMonitoringId { get; set; }
 
         public override string ToString()
         {

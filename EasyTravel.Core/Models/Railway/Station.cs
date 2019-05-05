@@ -7,6 +7,7 @@ namespace EasyTravel.Core.Models.Railway
     [DataContract]
     public class Station
     {
+        public int Id { get; set; }
         [DataMember]
         [JsonProperty("code")]
         public string Code { get; set; }

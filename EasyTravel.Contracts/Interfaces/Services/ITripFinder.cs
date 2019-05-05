@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using EasyTravel.Contracts.Interfaces.Core;
 
-namespace EasyTravel.Contracts.Interfaces
+namespace EasyTravel.Contracts.Interfaces.Services
 {
     public interface ITripFinder
     {

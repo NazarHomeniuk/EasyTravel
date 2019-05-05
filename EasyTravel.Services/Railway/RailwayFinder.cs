@@ -5,6 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using EasyTravel.Contracts.Interfaces;
+using EasyTravel.Contracts.Interfaces.Core;
+using EasyTravel.Contracts.Interfaces.Helpers;
+using EasyTravel.Contracts.Interfaces.Services;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Models.Railway;
 using Microsoft.Extensions.Options;
@@ -46,7 +49,7 @@ namespace EasyTravel.Services.Railway
             var response = await httpService.MakePostRequestAsync(config.ApiUrl, data);
             var responseString = await new StreamReader(response.GetResponseStream() ?? throw new InvalidOperationException()).ReadToEndAsync();
             var result = JsonConvert.DeserializeObject<TrainsInfo>(responseString);
-            result.Data.List.RemoveAll(i => i.Types.Length == 0);
+            result.Data.List.RemoveAll(i => !i.Types.Any());
             foreach (var train in result.Data.List)
             {
                 train.DepartureDate = DateTime.Parse(train.From.Date.Split(',')[1]);

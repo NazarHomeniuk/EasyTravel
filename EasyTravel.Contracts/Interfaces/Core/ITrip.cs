@@ -1,4 +1,4 @@
-﻿namespace EasyTravel.Contracts.Interfaces
+﻿namespace EasyTravel.Contracts.Interfaces.Core
 {
     public interface ITrip
     {

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 
-namespace EasyTravel.Contracts.Interfaces
+namespace EasyTravel.Contracts.Interfaces.Services
 {
     public interface IHttpService
     {

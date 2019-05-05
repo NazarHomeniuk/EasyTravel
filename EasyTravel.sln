@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTravel.API", "EasyTravel.API\EasyTravel.API.csproj", "{B0EEE102-5758-44AE-9C3D-7A352A926BD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyTravel.API", "EasyTravel.API\EasyTravel.API.csproj", "{B0EEE102-5758-44AE-9C3D-7A352A926BD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTravel.Core", "EasyTravel.Core\EasyTravel.Core.csproj", "{E98E680B-8254-4924-97C4-CED5AF072CFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyTravel.Core", "EasyTravel.Core\EasyTravel.Core.csproj", "{E98E680B-8254-4924-97C4-CED5AF072CFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTravel.Contracts", "EasyTravel.Contracts\EasyTravel.Contracts.csproj", "{327B5E9F-D701-43E0-8A68-791EF43F46AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyTravel.Contracts", "EasyTravel.Contracts\EasyTravel.Contracts.csproj", "{327B5E9F-D701-43E0-8A68-791EF43F46AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTravel.Services", "EasyTravel.Services\EasyTravel.Services.csproj", "{11CF6697-465C-4B6D-AB7F-C4BA020E60DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyTravel.Services", "EasyTravel.Services\EasyTravel.Services.csproj", "{11CF6697-465C-4B6D-AB7F-C4BA020E60DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTravel.HangFire", "EasyTravel.HangFire\EasyTravel.HangFire.csproj", "{87254A3E-E1AB-49F2-A2E9-A496EC7445BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{11CF6697-465C-4B6D-AB7F-C4BA020E60DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11CF6697-465C-4B6D-AB7F-C4BA020E60DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11CF6697-465C-4B6D-AB7F-C4BA020E60DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87254A3E-E1AB-49F2-A2E9-A496EC7445BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87254A3E-E1AB-49F2-A2E9-A496EC7445BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87254A3E-E1AB-49F2-A2E9-A496EC7445BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87254A3E-E1AB-49F2-A2E9-A496EC7445BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

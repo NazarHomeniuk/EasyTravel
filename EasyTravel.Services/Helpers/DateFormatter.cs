@@ -1,5 +1,6 @@
 ﻿using System;
 using EasyTravel.Contracts.Interfaces;
+using EasyTravel.Contracts.Interfaces.Helpers;
 
 namespace EasyTravel.Services.Helpers
 {
