@@ -2,11 +2,12 @@
 using EasyTravel.Core.Models.BlaBlaCar;
 using EasyTravel.Core.Models.Monitoring;
 using EasyTravel.Core.Models.Railway;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace EasyTravel.Core.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext
     {
         public DataContext(DbContextOptions options)
             : base(options)

@@ -1,10 +1,12 @@
-﻿using EasyTravel.API.Models;
+﻿using EasyTravel.API.ViewModels;
 using EasyTravel.Contracts.Interfaces.Services;
 using EasyTravel.HangFire.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasyTravel.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BlaBlaCarMonitoringController : ControllerBase
@@ -18,9 +20,9 @@ namespace EasyTravel.API.Controllers
 
         [HttpPost]
         [Route("create")]
-        public IActionResult Create(MonitoringRequest request)
+        public IActionResult Create(MonitoringViewModel viewModel)
         {
-            monitoringService.StartMonitoring(request.From, request.To, request.DepartureDate);
+            monitoringService.StartMonitoring(viewModel.From, viewModel.To, viewModel.DepartureDate);
             return Ok();
         }
     }

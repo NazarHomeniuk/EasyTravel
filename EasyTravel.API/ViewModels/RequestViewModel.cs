@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace EasyTravel.API.Models
+namespace EasyTravel.API.ViewModels
 {
-    public class Request
+    public class RequestViewModel
     {
         public string From { get; set; }
         public string To { get; set; }

@@ -1,4 +1,7 @@
-﻿using EasyTravel.Contracts.Interfaces.Helpers;
+﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using EasyTravel.Contracts.Interfaces.Helpers;
 using EasyTravel.Contracts.Interfaces.Services;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Data;
@@ -10,12 +13,15 @@ using EasyTravel.Services.Helpers;
 using EasyTravel.Services.Http;
 using EasyTravel.Services.Railway;
 using Hangfire;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EasyTravel.API
 {
@@ -38,6 +44,7 @@ namespace EasyTravel.API
             services.Configure<BusConfig>(Configuration.GetSection("Bus"));
             services.Configure<BingMapsConfig>(Configuration.GetSection("BingMaps"));
             services.Configure<HangFireConfig>(Configuration.GetSection("HangFire"));
+            services.Configure<IdentityConfig>(Configuration.GetSection("Authentication"));
 
             services.AddTransient<BlaBlaCarFinder>();
             services.AddTransient<RailwayFinder>();
@@ -53,6 +60,39 @@ namespace EasyTravel.API
             var connectionString = Configuration["ConnectionString:EasyTravel"];
             services.AddDbContext<DataContext>(opts => opts.UseSqlServer(connectionString,
                 b => b.MigrationsAssembly("EasyTravel.Core")));
+            services.AddIdentity<IdentityUser, IdentityRole>(opts =>
+                {
+                    opts.Password.RequireNonAlphanumeric = false;
+                    opts.Password.RequireUppercase = false;
+                    opts.Password.RequireLowercase = false;
+                    opts.Password.RequireDigit = false;
+                    opts.Password.RequiredLength = 6;
+                    opts.User.RequireUniqueEmail = true;
+                    opts.User.AllowedUserNameCharacters += " ";
+                })
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+                })
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.RequireHttpsMetadata = false;
+                    cfg.SaveToken = true;
+                    cfg.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = Configuration["Authentication:Issuer"],
+                        ValidAudience = Configuration["Authentication:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:Key"]))
+                    };
+                });
             services.AddHangfire(x => x.UseSqlServerStorage(connectionString));
         }
 
@@ -74,6 +114,7 @@ namespace EasyTravel.API
                 .AllowAnyHeader());
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseHangfireDashboard();
             app.UseHangfireServer();
             app.UseMvc();
