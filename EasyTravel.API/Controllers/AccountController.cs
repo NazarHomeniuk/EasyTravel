@@ -34,14 +34,17 @@ namespace EasyTravel.API.Controllers
         public async Task<IActionResult> Login(LoginViewModel viewModel)
         {
             var user = await userManager.FindByEmailAsync(viewModel.Email);
-            var result = await signInManager.PasswordSignInAsync(user, viewModel.Password, false, false);
-
-            if (result.Succeeded)
+            if (user != null)
             {
-                return Ok(GenerateJwtToken(viewModel.Email, user));
+                var result = await signInManager.PasswordSignInAsync(user, viewModel.Password, false, false);
+
+                if (result.Succeeded)
+                {
+                    return Ok(GenerateJwtToken(viewModel.Email, user));
+                }
             }
 
-            return Unauthorized("Invalid email or password.");
+            return Forbid();
         }
 
         [HttpPost]

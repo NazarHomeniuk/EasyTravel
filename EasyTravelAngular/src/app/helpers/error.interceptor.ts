@@ -15,16 +15,16 @@ export class ErrorInterceptor implements HttpInterceptor {
                 this.userService.logout();
                 location.reload(true);
             }
-            else {
-                var error;
-                if (err.status === 400) {
-                    error = "Невірні електронна адреса або пароль";
-                }
-                else {
-                    error = err.error.message || err.statusText;
-                }
-                return throwError(error);
+
+            var error: string;
+            if (err.status === 403) {
+                error = "Невірні електронна пошта або пароль";
             }
-        }))
+            else {
+                error = err.error.message || err.statusText;
+            }
+            return throwError(error);
+        }
+        ))
     }
 }

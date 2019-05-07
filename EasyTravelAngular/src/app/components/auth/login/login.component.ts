@@ -34,12 +34,15 @@ export class LoginComponent implements OnInit {
     loginModel.email = this.emailField.value;
     loginModel.password = this.passwordField.value;
     this.userService.login(loginModel).subscribe(token => {
-      console.log(token);
       if (token) {
-        console.log(token);
         localStorage.setItem('accessToken', JSON.stringify(token));
         this.router.navigate([this.returnUrl]);
       }
+    },
+    error => {
+      this.snackBar.open(error, "Закрити", {
+        duration: 3000
+      });
     });
   }
 

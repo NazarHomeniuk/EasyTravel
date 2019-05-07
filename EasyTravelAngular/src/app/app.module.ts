@@ -107,7 +107,8 @@ import {
     UserService,
     AuthGuardService,
     { provide: MAT_DATE_LOCALE, useValue: 'uk-UA' },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
