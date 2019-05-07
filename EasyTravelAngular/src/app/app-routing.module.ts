@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent, FindComponent, AuthComponent, LoginComponent, RegisterComponent } from './components';
+import { DashboardComponent, FindComponent, AuthComponent, LoginComponent, RegisterComponent, MonitorComponent } from './components';
 import { AuthGuardService } from './guards';
 
 const routes: Routes = [
@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path: 'find',
         component: FindComponent
+      },
+      {
+        path: 'monitor',
+        component: MonitorComponent
       }
     ]
   },
