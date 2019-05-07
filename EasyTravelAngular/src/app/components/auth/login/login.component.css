@@ -1,0 +1,41 @@
+.login-card {
+    height: 100%;
+  }
+
+mat-card {
+  min-width: 250px;
+  min-height: 340px;
+  height: 50%;
+  width: 25%;
+  } 
+
+mat-card-subtitle {
+  text-align: center;
+  }
+
+a:link {
+    text-decoration: none;
+    background-color: "#3f51b5";
+  }
+  
+a:visited {
+    text-decoration: none;
+    background-color: "#3f51b5";
+  }
+  
+a:hover {
+    text-decoration: none;
+  }
+  
+a:active {
+    text-decoration: none;
+    background-color: "#3f51b5";
+  }
+
+.hide-icon {
+  cursor: pointer;
+  }
+
+.mat-body {
+  text-align: center;
+  }

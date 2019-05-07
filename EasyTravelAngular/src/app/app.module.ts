@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule  } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -24,6 +24,13 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import { MustMatchDirective } from './directives/index';
+
+import { AuthGuardService } from './guards/auth-guard.service';
+
+import { JwtInterceptor, ErrorInterceptor } from './helpers';
 
 import { 
   DashboardComponent,
@@ -34,14 +41,18 @@ import {
   RailwayCardComponent,
   BlaBlaCarCardComponent,
   BusCardComponent,
-  TripCardComponent
+  TripCardComponent,
+  AuthComponent,
+  LoginComponent,
+  RegisterComponent
 } from './components/';
 
 import { 
   LocationsService,
   RailwayService,
   BlaBlaCarService,
-  BusService 
+  BusService,
+  UserService 
 } from './services';
 
 @NgModule({
@@ -55,7 +66,11 @@ import {
     RailwayCardComponent,
     BlaBlaCarCardComponent,
     BusCardComponent,
-    TripCardComponent
+    TripCardComponent,
+    AuthComponent,
+    LoginComponent,
+    RegisterComponent,
+    MustMatchDirective
   ],
   imports: [
     BrowserModule,
@@ -80,8 +95,8 @@ import {
     MatExpansionModule,
     MatNativeDateModule,
     NgxMaterialTimepickerModule,
-    AmazingTimePickerModule
-     
+    AmazingTimePickerModule,
+    MatSnackBarModule
   ],
   providers: [
     LocationsService,
@@ -89,7 +104,10 @@ import {
     BlaBlaCarService,
     BusService,
     MatDatepickerModule,
-    { provide: MAT_DATE_LOCALE, useValue: 'uk-UA' }
+    UserService,
+    AuthGuardService,
+    { provide: MAT_DATE_LOCALE, useValue: 'uk-UA' },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

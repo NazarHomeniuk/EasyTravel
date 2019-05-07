@@ -5,3 +5,6 @@ export { Request } from "./request";
 export { BaseTrip } from "./base-trip";
 export { TripType } from "./trip-type";
 export { CustomTime } from "./custom-time";
+export { LoginModel } from "./auth/login-model";
+export { RegisterModel } from "./auth/register-model";
+export { User } from "./identity/user";

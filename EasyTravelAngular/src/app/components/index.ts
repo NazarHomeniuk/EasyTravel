@@ -7,3 +7,6 @@ export { BlaBlaCarCardComponent } from "./dashboard/find/trips/bla-bla-car-card/
 export { BusCardComponent } from "./dashboard/find/trips/bus-card/bus-card.component";
 export { RailwayCardComponent } from "./dashboard/find/trips/railway-card/railway-card.component";
 export { TripCardComponent } from "./dashboard/find/trips/trip-card/trip-card.component";
+export { AuthComponent } from "./auth/auth.component";
+export { LoginComponent } from "./auth/login/login.component";
+export { RegisterComponent } from "./auth/register/register.component";
