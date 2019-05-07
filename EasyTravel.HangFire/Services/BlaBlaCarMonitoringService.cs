@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using EasyTravel.Contracts.Interfaces.Services;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Data;
 using EasyTravel.Core.Models.Monitoring;
 using EasyTravel.HangFire.Jobs.BlaBlaCar;
 using Hangfire;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace EasyTravel.HangFire.Services
@@ -20,18 +22,22 @@ namespace EasyTravel.HangFire.Services
             hangFireConfig = options.Value;
         }
 
-        public void StartMonitoring(string from, string to, DateTime departureDate)
+        public async Task StartMonitoring(string from, string to, DateTime departureDate, string userId)
         {
+            var user = await dataContext.Users.Include(u => u.BlaBlaCarMonitoring)
+                .FirstOrDefaultAsync(u => u.Id == userId);
             var monitoring = new BlaBlaCarMonitoring
             {
+                Guid = Guid.NewGuid().ToString(),
                 DepartureDate = departureDate,
                 From = from,
                 To = to,
                 IsInProcess = true
             };
-            var monitoringResult = dataContext.BlaBlaCarMonitoring.Add(monitoring).Entity;
-            dataContext.SaveChanges();
-            RecurringJob.AddOrUpdate<BlaBlaCarJob>(monitoringResult.Id.ToString(), j => j.FindTrips(monitoringResult),
+            user.BlaBlaCarMonitoring.Add(monitoring);
+            dataContext.Entry(user).State = EntityState.Modified;
+            await dataContext.SaveChangesAsync();
+            RecurringJob.AddOrUpdate<BlaBlaCarJob>(monitoring.Guid, j => j.FindTrips(monitoring),
                 hangFireConfig.MonitoringCron);
         }
     }

@@ -7,6 +7,7 @@ namespace EasyTravel.Core.Models.Monitoring
     public class RailwayMonitoring
     {
         public int Id { get; set; }
+        public string Guid { get; set; }
         public string From { get; set; }
         public string To { get; set; }
         public DateTime DepartureDate { get; set; }

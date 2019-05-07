@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Interfaces\Data\" />
     <Folder Include="Interfaces\HangFire\" />
   </ItemGroup>
 

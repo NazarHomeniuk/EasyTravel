@@ -10,3 +10,10 @@ export { TripCardComponent } from "./dashboard/find/trips/trip-card/trip-card.co
 export { AuthComponent } from "./auth/auth.component";
 export { LoginComponent } from "./auth/login/login.component";
 export { RegisterComponent } from "./auth/register/register.component";
+export { MonitorComponent } from "./dashboard/monitor/monitor.component";
+export { BusMonitorComponent } from "./dashboard/monitor/bus-monitor/bus-monitor.component";
+export { RailwayMonitorComponent } from "./dashboard/monitor/railway-monitor/railway-monitor.component";
+export { BlaBlaCarMonitorComponent } from "./dashboard/monitor/bla-bla-car-monitor/bla-bla-car-monitor.component";
+export { RailwayMonitorCardComponent } from "./dashboard/monitor/railway-monitor/railway-monitor-card/railway-monitor-card.component";
+export { BusMonitorCardComponent } from "./dashboard/monitor/bus-monitor/bus-monitor-card/bus-monitor-card.component";
+export { BlaBlaCarMonitorCardComponent } from "./dashboard/monitor/bla-bla-car-monitor/bla-bla-car-monitor-card/bla-bla-car-monitor-card.component";

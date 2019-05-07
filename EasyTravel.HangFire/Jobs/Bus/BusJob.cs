@@ -28,13 +28,13 @@ namespace EasyTravel.HangFire.Jobs.Bus
                 dataContext.BusMonitoring.Include(m => m.Trips).FirstOrDefault(m => m.Id == monitoring.Id);
             if (monitoringResult == null)
             {
-                RecurringJob.RemoveIfExists(monitoring.Id.ToString());
+                RecurringJob.RemoveIfExists(monitoring.Guid);
                 return;
             }
 
             if (monitoringResult.DepartureDate <= DateTime.Now)
             {
-                RecurringJob.RemoveIfExists(monitoring.Id.ToString());
+                RecurringJob.RemoveIfExists(monitoring.Guid);
                 monitoringResult.IsSuccessful = false;
                 monitoringResult.IsInProcess = false;
                 dataContext.Entry(monitoringResult).State = EntityState.Modified;
@@ -51,7 +51,7 @@ namespace EasyTravel.HangFire.Jobs.Bus
                 monitoringResult.Trips = trips;
                 dataContext.Entry(monitoringResult).State = EntityState.Modified;
                 await dataContext.SaveChangesAsync();
-                RecurringJob.RemoveIfExists(monitoring.Id.ToString());
+                RecurringJob.RemoveIfExists(monitoring.Guid);
             }
         }
     }

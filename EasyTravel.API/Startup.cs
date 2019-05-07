@@ -1,10 +1,10 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using EasyTravel.Contracts.Interfaces.Helpers;
 using EasyTravel.Contracts.Interfaces.Services;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Data;
+using EasyTravel.Core.Models.Identity;
 using EasyTravel.HangFire.Services;
 using EasyTravel.Services.BingMaps;
 using EasyTravel.Services.BlaBlaCar;
@@ -60,7 +60,7 @@ namespace EasyTravel.API
             var connectionString = Configuration["ConnectionString:EasyTravel"];
             services.AddDbContext<DataContext>(opts => opts.UseSqlServer(connectionString,
                 b => b.MigrationsAssembly("EasyTravel.Core")));
-            services.AddIdentity<IdentityUser, IdentityRole>(opts =>
+            services.AddIdentity<User, IdentityRole>(opts =>
                 {
                     opts.Password.RequireNonAlphanumeric = false;
                     opts.Password.RequireUppercase = false;

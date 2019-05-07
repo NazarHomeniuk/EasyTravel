@@ -25,6 +25,7 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { MustMatchDirective } from './directives/index';
 
@@ -44,7 +45,14 @@ import {
   TripCardComponent,
   AuthComponent,
   LoginComponent,
-  RegisterComponent
+  RegisterComponent,
+  MonitorComponent,
+  BusMonitorComponent,
+  BlaBlaCarMonitorComponent,
+  RailwayMonitorComponent,
+  RailwayMonitorCardComponent,
+  BusMonitorCardComponent,
+  BlaBlaCarMonitorCardComponent
 } from './components/';
 
 import { 
@@ -52,7 +60,10 @@ import {
   RailwayService,
   BlaBlaCarService,
   BusService,
-  UserService 
+  UserService, 
+  BusMonitorService,
+  BlaBlaCarMonitorService,
+  RailwayMonitorService
 } from './services';
 
 @NgModule({
@@ -70,7 +81,14 @@ import {
     AuthComponent,
     LoginComponent,
     RegisterComponent,
-    MustMatchDirective
+    MustMatchDirective,
+    MonitorComponent,
+    RailwayMonitorCardComponent,
+    BusMonitorCardComponent,
+    BlaBlaCarMonitorCardComponent,
+    BusMonitorComponent,
+    BlaBlaCarMonitorComponent,
+    RailwayMonitorComponent
   ],
   imports: [
     BrowserModule,
@@ -96,7 +114,8 @@ import {
     MatNativeDateModule,
     NgxMaterialTimepickerModule,
     AmazingTimePickerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule
   ],
   providers: [
     LocationsService,
@@ -106,6 +125,9 @@ import {
     MatDatepickerModule,
     UserService,
     AuthGuardService,
+    RailwayMonitorService,
+    BusMonitorService,
+    BlaBlaCarMonitorService,
     { provide: MAT_DATE_LOCALE, useValue: 'uk-UA' },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

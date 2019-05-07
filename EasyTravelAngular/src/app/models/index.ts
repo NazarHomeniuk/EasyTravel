@@ -8,3 +8,6 @@ export { CustomTime } from "./custom-time";
 export { LoginModel } from "./auth/login-model";
 export { RegisterModel } from "./auth/register-model";
 export { User } from "./identity/user";
+export { RailwayMonitor } from "./monitor/railwayMonitor";
+export { BlaBlaCarMonitor } from "./monitor/blaBlaCarMonitor";
+export { BusMonitor } from "./monitor/busMonitor";

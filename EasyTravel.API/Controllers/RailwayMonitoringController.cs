@@ -1,7 +1,10 @@
-﻿using EasyTravel.API.ViewModels;
+﻿using System.Threading.Tasks;
+using EasyTravel.API.ViewModels;
 using EasyTravel.Contracts.Interfaces.Services;
+using EasyTravel.Core.Models.Identity;
 using EasyTravel.HangFire.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EasyTravel.API.Controllers
@@ -12,17 +15,20 @@ namespace EasyTravel.API.Controllers
     public class RailwayMonitoringController : ControllerBase
     {
         private readonly IMonitoringService monitoringService;
+        private readonly UserManager<User> userManager;
 
-        public RailwayMonitoringController(RailwayMonitoringService monitoringService)
+        public RailwayMonitoringController(RailwayMonitoringService monitoringService, UserManager<User> userManager)
         {
             this.monitoringService = monitoringService;
+            this.userManager = userManager;
         }
 
         [HttpPost]
         [Route("create")]
-        public IActionResult Create(MonitoringViewModel viewModel)
+        public async Task<IActionResult> Create(MonitoringViewModel viewModel)
         {
-            monitoringService.StartMonitoring(viewModel.From, viewModel.To, viewModel.DepartureDate);
+            var user = await userManager.GetUserAsync(User);
+            await monitoringService.StartMonitoring(viewModel.From, viewModel.To, viewModel.DepartureDate, user.Id);
             return Ok();
         }
     }

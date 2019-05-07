@@ -34,6 +34,5 @@ export class UserService {
 
   logout() {
     localStorage.removeItem('accessToken');
-    this.currentUser = null;
   }
 }

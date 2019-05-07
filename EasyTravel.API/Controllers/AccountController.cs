@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EasyTravel.API.ViewModels;
 using EasyTravel.Core.Config;
+using EasyTravel.Core.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -17,11 +18,11 @@ namespace EasyTravel.API.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly SignInManager<IdentityUser> signInManager;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<User> signInManager;
+        private readonly UserManager<User> userManager;
         private readonly IdentityConfig identityConfig;
 
-        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager,
+        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager,
             IOptions<IdentityConfig> options)
         {
             this.signInManager = signInManager;
@@ -51,7 +52,7 @@ namespace EasyTravel.API.Controllers
         [Route("register")]
         public async Task<IActionResult> Register(RegisterViewModel viewModel)
         {
-            var user = new IdentityUser
+            var user = new User
             {
                 UserName = viewModel.UserName,
                 Email = viewModel.Email,
