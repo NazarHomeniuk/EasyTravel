@@ -24,7 +24,5 @@ namespace EasyTravel.Core.Models.Bus
         public double Price { get; set; }
         public string BusName { get; set; }
         public string BookingLink { get; set; }
-        public BusMonitoring Monitoring { get; set; }
-        public int BusMonitoringId { get; set; }
     }
 }

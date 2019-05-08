@@ -53,6 +53,8 @@ namespace EasyTravel.HangFire.Services
                 .Include(u => u.BlaBlaCarMonitoring).ThenInclude(t => t.Trips).ThenInclude(t => t.DeparturePlace)
                 .Include(u => u.BlaBlaCarMonitoring).ThenInclude(t => t.Trips).ThenInclude(t => t.Duration)
                 .Include(u => u.BlaBlaCarMonitoring).ThenInclude(t => t.Trips).ThenInclude(t => t.Distance)
+                .Include(u => u.BlaBlaCarMonitoring).ThenInclude(t => t.Trips).ThenInclude(t => t.Price)
+                .Include(u => u.BlaBlaCarMonitoring).ThenInclude(t => t.Trips).ThenInclude(t => t.Links)
                 .FirstOrDefaultAsync(u => u.Id == userId);
             return user?.BlaBlaCarMonitoring.ToList() ?? new List<BlaBlaCarMonitoring>();
         }

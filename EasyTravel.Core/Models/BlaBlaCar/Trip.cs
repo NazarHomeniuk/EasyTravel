@@ -31,8 +31,6 @@ namespace EasyTravel.Core.Models.BlaBlaCar
         public Distance Distance { get; set; }
         [JsonProperty("car")]
         public Car Car { get; set; }
-        public BlaBlaCarMonitoring Monitoring;
-        public int BlaBlaCarMonitoringId { get; set; }
         [NotMapped]
         [JsonProperty("locations_to_display")]
         public string[] LocationsToDisplay { get; set; }

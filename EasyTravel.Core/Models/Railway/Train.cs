@@ -83,10 +83,6 @@ namespace EasyTravel.Core.Models.Railway
         [JsonProperty("bookingLink")]
         public string BookingLink { get; set; }
 
-        public RailwayMonitoring Monitoring { get; set; }
-
-        public int RailwayMonitoringId { get; set; }
-
         public override string ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();

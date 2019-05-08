@@ -1,11 +1,23 @@
 <mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Потяги">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>train</mat-icon>
+      Потяги
+    </ng-template>
     <app-railway-monitor></app-railway-monitor>
   </mat-tab>
-  <mat-tab label="Автобуси">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>directions_bus</mat-icon>
+      Автобуси
+    </ng-template>
     <app-bus-monitor></app-bus-monitor>
   </mat-tab>
-  <mat-tab label="Попутники">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon>directions_car</mat-icon>
+      Попутники
+    </ng-template>
     <app-bla-bla-car-monitor></app-bla-bla-car-monitor>
   </mat-tab>
 </mat-tab-group>

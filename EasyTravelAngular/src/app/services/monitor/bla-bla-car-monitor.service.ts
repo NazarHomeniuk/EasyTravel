@@ -14,4 +14,8 @@ export class BlaBlaCarMonitorService {
   getAll() : Observable<BlaBlaCarMonitor[]> {
     return this.httpClient.get<BlaBlaCarMonitor[]>(`${environment.API_URL}blaBlaCarMonitoring/getAll`);
   }
+
+  create(monitor: BlaBlaCarMonitor) : Observable<any> {
+    return this.httpClient.post(`${environment.API_URL}blaBlaCarMonitoring/create`, monitor);
+  }
 }
