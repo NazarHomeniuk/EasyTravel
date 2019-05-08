@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
-using EasyTravel.API.ViewModels;
+using EasyTravel.API.ViewModels.Monitoring;
 using EasyTravel.Contracts.Interfaces.Services;
 using EasyTravel.Core.Models.Identity;
-using EasyTravel.HangFire.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,21 +13,31 @@ namespace EasyTravel.API.Controllers
     [ApiController]
     public class RailwayMonitoringController : ControllerBase
     {
-        private readonly IMonitoringService monitoringService;
+        private readonly IRailwayMonitoringService monitoringService;
         private readonly UserManager<User> userManager;
 
-        public RailwayMonitoringController(RailwayMonitoringService monitoringService, UserManager<User> userManager)
+        public RailwayMonitoringController(IRailwayMonitoringService monitoringService, UserManager<User> userManager)
         {
             this.monitoringService = monitoringService;
             this.userManager = userManager;
         }
 
-        [HttpPost]
-        [Route("create")]
-        public async Task<IActionResult> Create(MonitoringViewModel viewModel)
+        [HttpGet]
+        [Route("getAll")]
+        public async Task<IActionResult> GetAll()
         {
             var user = await userManager.GetUserAsync(User);
-            await monitoringService.StartMonitoring(viewModel.From, viewModel.To, viewModel.DepartureDate, user.Id);
+            var monitor = await monitoringService.GetAllMonitoringForUser(user.Id);
+            return Ok(monitor);
+        }
+
+        [HttpPost]
+        [Route("create")]
+        public async Task<IActionResult> Create(RailwayMonitoringViewModel viewModel)
+        {
+            var user = await userManager.GetUserAsync(User);
+            await monitoringService.StartMonitoring(viewModel.From, viewModel.To, viewModel.DepartureDate,
+                viewModel.PlacesType, viewModel.MinPlaces, user.Id);
             return Ok();
         }
     }

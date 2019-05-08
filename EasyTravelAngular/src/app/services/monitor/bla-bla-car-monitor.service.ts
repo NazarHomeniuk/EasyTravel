@@ -1,9 +1,17 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { BlaBlaCarMonitor } from 'src/app/models';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlaBlaCarMonitorService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
+
+  getAll() : Observable<BlaBlaCarMonitor[]> {
+    return this.httpClient.get<BlaBlaCarMonitor[]>(`${environment.API_URL}blaBlaCarMonitoring/getAll`);
+  }
 }

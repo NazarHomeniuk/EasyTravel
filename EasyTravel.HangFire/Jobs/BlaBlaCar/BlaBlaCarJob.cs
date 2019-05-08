@@ -43,7 +43,8 @@ namespace EasyTravel.HangFire.Jobs.BlaBlaCar
             }
 
             var trips = (await tripFinder.FindTripsAsync(monitoringResult.From, monitoringResult.To,
-                monitoringResult.DepartureDate)).ToList().ConvertAll(t => (Trip)t);
+                    monitoringResult.DepartureDate)).ToList().ConvertAll(t => (Trip) t)
+                .FindAll(t => t.SeatsLeft >= monitoring.MinPlaces);
             if (trips.Any())
             {
                 monitoringResult.IsSuccessful = true;

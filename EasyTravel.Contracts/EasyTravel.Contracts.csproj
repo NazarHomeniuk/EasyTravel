@@ -5,8 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\Data\" />
-    <Folder Include="Interfaces\HangFire\" />
+    <Compile Remove="Interfaces\Data\**" />
+    <Compile Remove="Interfaces\HangFire\**" />
+    <EmbeddedResource Remove="Interfaces\Data\**" />
+    <EmbeddedResource Remove="Interfaces\HangFire\**" />
+    <None Remove="Interfaces\Data\**" />
+    <None Remove="Interfaces\HangFire\**" />
   </ItemGroup>
 
 </Project>

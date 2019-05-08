@@ -7,6 +7,8 @@ export class RailwayMonitor {
     placesType: string;
     minPlaces: number;
     isInProcess: boolean;
-    IsSuccessful: boolean;
+    isSuccessful: boolean;
     trips: Train[]; 
+
+    constructor() {}
 }

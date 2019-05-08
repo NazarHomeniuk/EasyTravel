@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using EasyTravel.Contracts.Interfaces;
 using EasyTravel.Contracts.Interfaces.Services;
 
 namespace EasyTravel.Services.Http

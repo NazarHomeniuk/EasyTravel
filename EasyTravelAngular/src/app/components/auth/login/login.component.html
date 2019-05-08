@@ -29,15 +29,14 @@
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="center end">
-        <div fxLayout="column" fxLayoutAlign="end center">
-          <mat-card-actions>
-            <div class="card-actions" fxLayout="column" fxLayoutAlign="end center" fxLayoutGap="10px">
-              <button mat-flat-button color="primary" (click)="login()" [disabled]="passwordField.invalid || emailField.invalid">Увійти</button>
-              <label class="mat-body">Немає облікового запису? <a class="mat-body-strong"
-                  routerLink="/register">Зареєструватись</a></label>
-            </div>
-          </mat-card-actions>
-        </div>
+        <mat-card-actions>
+          <div class="card-actions" fxLayout="column" fxLayoutAlign="end center" fxLayoutGap="10px">
+            <button mat-flat-button color="primary" (click)="login()"
+              [disabled]="passwordField.invalid || emailField.invalid">Увійти</button>
+            <label class="mat-body">Немає облікового запису? <a class="mat-body-strong"
+                routerLink="/register">Зареєструватись</a></label>
+          </div>
+        </mat-card-actions>
       </div>
     </div>
   </mat-card>

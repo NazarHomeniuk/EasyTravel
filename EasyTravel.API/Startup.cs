@@ -2,6 +2,7 @@
 using System.Text;
 using EasyTravel.Contracts.Interfaces.Helpers;
 using EasyTravel.Contracts.Interfaces.Services;
+using EasyTravel.Contracts.Interfaces.Services.HangFire;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Data;
 using EasyTravel.Core.Models.Identity;
@@ -49,9 +50,9 @@ namespace EasyTravel.API
             services.AddTransient<BlaBlaCarFinder>();
             services.AddTransient<RailwayFinder>();
             services.AddTransient<BusFinder>();
-            services.AddTransient<RailwayMonitoringService>();
-            services.AddTransient<BusMonitoringService>();
-            services.AddTransient<BlaBlaCarMonitoringService>();
+            services.AddTransient<IRailwayMonitoringService, RailwayMonitoringService>();
+            services.AddTransient<IBusMonitoringService, BusMonitoringService>();
+            services.AddTransient<IBlaBlaCarMonitoringService, BlaBlaCarMonitoringService>();
             services.AddTransient<IDateFormatter, DateFormatter>();
             services.AddTransient<IHttpService, HttpService>();
             services.AddTransient<IMapsService, MapsService>();

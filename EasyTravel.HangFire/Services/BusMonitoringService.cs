@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using EasyTravel.Contracts.Interfaces.Services;
+using EasyTravel.Contracts.Interfaces.Core;
+using EasyTravel.Contracts.Interfaces.Services.HangFire;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Data;
 using EasyTravel.Core.Models.Monitoring;
@@ -11,7 +14,7 @@ using Microsoft.Extensions.Options;
 
 namespace EasyTravel.HangFire.Services
 {
-    public class BusMonitoringService : IMonitoringService
+    public class BusMonitoringService : IBusMonitoringService
     {
         private readonly DataContext dataContext;
         private readonly HangFireConfig hangFireConfig;
@@ -39,6 +42,13 @@ namespace EasyTravel.HangFire.Services
             dataContext.SaveChanges();
             RecurringJob.AddOrUpdate<BusJob>(monitoring.Guid, j => j.FindTrips(monitoring),
                 hangFireConfig.MonitoringCron);
+        }
+
+        public async Task<IEnumerable<IMonitoring>> GetAllMonitoringForUser(string userId)
+        {
+            var user = await dataContext.Users.Include(u => u.BusMonitoring).ThenInclude(t => t.Trips)
+                .FirstOrDefaultAsync(u => u.Id == userId);
+            return user?.BusMonitoring.ToList() ?? new List<BusMonitoring>();
         }
     }
 }

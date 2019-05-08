@@ -26,6 +26,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { MustMatchDirective } from './directives/index';
 
@@ -52,7 +54,10 @@ import {
   RailwayMonitorComponent,
   RailwayMonitorCardComponent,
   BusMonitorCardComponent,
-  BlaBlaCarMonitorCardComponent
+  BlaBlaCarMonitorCardComponent,
+  RailwayMonitorDialogComponent,
+  BlaBlaCarMonitorDialogComponent,
+  BusMonitorDialogComponent
 } from './components/';
 
 import { 
@@ -88,7 +93,10 @@ import {
     BlaBlaCarMonitorCardComponent,
     BusMonitorComponent,
     BlaBlaCarMonitorComponent,
-    RailwayMonitorComponent
+    RailwayMonitorComponent,
+    RailwayMonitorDialogComponent,
+    BusMonitorDialogComponent,
+    BlaBlaCarMonitorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -115,7 +123,9 @@ import {
     NgxMaterialTimepickerModule,
     AmazingTimePickerModule,
     MatSnackBarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDividerModule,
+    MatDialogModule
   ],
   providers: [
     LocationsService,
@@ -131,6 +141,11 @@ import {
     { provide: MAT_DATE_LOCALE, useValue: 'uk-UA' },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+  ],
+  entryComponents: [ 
+    RailwayMonitorDialogComponent,
+    BusMonitorDialogComponent,
+    BlaBlaCarMonitorDialogComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -43,15 +43,24 @@ namespace EasyTravel.HangFire.Jobs.Railway
             }
 
             var trips = (await tripFinder.FindTripsAsync(monitoringResult.From, monitoringResult.To,
-                monitoringResult.DepartureDate)).ToList().ConvertAll(t => (Train) t);
+                    monitoringResult.DepartureDate)).ToList().ConvertAll(t => (Train) t)
+                .FindAll(t => t.Types.Any(p => p.Places >= monitoring.MinPlaces));
             if (trips.Any())
             {
-                monitoringResult.IsSuccessful = true;
-                monitoringResult.IsInProcess = false;
-                monitoringResult.Trips = trips;
-                dataContext.Entry(monitoringResult).State = EntityState.Modified;
-                await dataContext.SaveChangesAsync();
-                RecurringJob.RemoveIfExists(monitoring.Guid);
+                if (!string.IsNullOrEmpty(monitoring.PlacesType))
+                {
+                    trips = trips.FindAll(t =>
+                        t.Types.Any(p => p.Letter == monitoring.PlacesType));
+                }
+                if (trips.Any())
+                {
+                    monitoringResult.IsSuccessful = true;
+                    monitoringResult.IsInProcess = false;
+                    monitoringResult.Trips = trips;
+                    dataContext.Entry(monitoringResult).State = EntityState.Modified;
+                    await dataContext.SaveChangesAsync();
+                    RecurringJob.RemoveIfExists(monitoring.Guid);
+                }
             }
         }
     }

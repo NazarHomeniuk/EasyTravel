@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { BusMonitor } from 'src/app/models';
 
 @Component({
   selector: 'app-bus-monitor-card',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BusMonitorCardComponent implements OnInit {
 
+  @Input() monitor: BusMonitor;
+  
   constructor() { }
 
   ngOnInit() {

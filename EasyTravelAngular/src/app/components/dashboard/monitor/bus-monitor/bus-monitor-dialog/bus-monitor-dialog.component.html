@@ -1,0 +1,51 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <div fxLayout="row">
+    <h1 class="mat-h1 header">Створення моніторингу</h1>
+    <mat-icon class="close" color="primary">close</mat-icon>
+  </div>
+  <div fxLayout="row">
+    <div fxLayout="column">
+      <mat-form-field appearance="legacy">
+        <mat-label>Початок подорожі</mat-label>
+        <input matInput [formControl]="fromInput" placeholder="Початок подорожі" [matAutocomplete]="from">
+        <mat-autocomplete #from="matAutocomplete">
+          <mat-option *ngFor="let option of options | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-icon matSuffix>location_on</mat-icon>
+        <mat-error *ngIf="fromInput.invalid">Поле обов'язкове</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="legacy">
+        <mat-label>Кінець подорожі</mat-label>
+        <input matInput [formControl]="toInput" placeholder="Кінець подорожі" [matAutocomplete]="to">
+        <mat-autocomplete #to="matAutocomplete">
+          <mat-option *ngFor="let option of options | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-icon matSuffix>location_on</mat-icon>
+        <mat-error *ngIf="toInput.invalid">Поле обов'язкове</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="legacy">
+        <mat-label>Дата відправлення</mat-label>
+        <input matInput [formControl]="dateInput" [min]="minDate" [matDatepicker]="dp" placeholder="Дата відправлення"
+          readonly>
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
+        <mat-error *ngIf="dateInput.invalid">Поле обов'язкове</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="legacy">
+        <mat-label>Час відправлення</mat-label>
+        <input matInput type="time" [disableClick]="true" [formControl]="timeInput" placeholder="Час відправлення"
+          [ngxTimepicker]="fullTime" [format]="24" readonly>
+        <ngx-material-timepicker-toggle matSuffix [for]="fullTime">access_time</ngx-material-timepicker-toggle>
+        <ngx-material-timepicker #fullTime></ngx-material-timepicker>
+        <mat-error *ngIf="timeInput.invalid">Поле обов'язкове</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout="row">
+    <button mat-flat-button color="primary" [disabled]="!isValid()" (click)="create()">Створити</button>
+  </div>
+</div>

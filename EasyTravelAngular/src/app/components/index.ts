@@ -17,3 +17,6 @@ export { BlaBlaCarMonitorComponent } from "./dashboard/monitor/bla-bla-car-monit
 export { RailwayMonitorCardComponent } from "./dashboard/monitor/railway-monitor/railway-monitor-card/railway-monitor-card.component";
 export { BusMonitorCardComponent } from "./dashboard/monitor/bus-monitor/bus-monitor-card/bus-monitor-card.component";
 export { BlaBlaCarMonitorCardComponent } from "./dashboard/monitor/bla-bla-car-monitor/bla-bla-car-monitor-card/bla-bla-car-monitor-card.component";
+export { RailwayMonitorDialogComponent } from "./dashboard/monitor/railway-monitor/railway-monitor-dialog/railway-monitor-dialog.component";
+export { BusMonitorDialogComponent } from "./dashboard/monitor/bus-monitor/bus-monitor-dialog/bus-monitor-dialog.component";
+export { BlaBlaCarMonitorDialogComponent } from "./dashboard/monitor/bla-bla-car-monitor/bla-bla-car-monitor-dialog/bla-bla-car-monitor-dialog.component";

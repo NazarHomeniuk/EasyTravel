@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using EasyTravel.Contracts.Interfaces.Core;
 using EasyTravel.Core.Models.Bus;
 
 namespace EasyTravel.Core.Models.Monitoring
 {
-    public class BusMonitoring
+    public class BusMonitoring : IMonitoring
     {
         public int Id { get; set; }
         public string Guid { get; set; }

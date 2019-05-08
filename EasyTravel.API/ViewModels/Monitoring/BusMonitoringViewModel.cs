@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace EasyTravel.API.ViewModels
+namespace EasyTravel.API.ViewModels.Monitoring
 {
-    public class MonitoringViewModel
+    public class BusMonitoringViewModel
     {
         public string From { get; set; }
         public string To { get; set; }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BlaBlaCarMonitorService } from 'src/app/services';
+import { BlaBlaCarMonitor } from 'src/app/models';
 
 @Component({
   selector: 'app-bla-bla-car-monitor',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlaBlaCarMonitorComponent implements OnInit {
 
-  constructor() { }
+  monitor: BlaBlaCarMonitor[];
+
+  constructor(private monitorService: BlaBlaCarMonitorService) { }
 
   ngOnInit() {
+    this.monitorService.getAll().subscribe(data => {
+      this.monitor = data;
+    });
   }
 
 }

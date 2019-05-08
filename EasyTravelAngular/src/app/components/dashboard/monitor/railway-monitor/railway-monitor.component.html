@@ -1,3 +1,10 @@
-<p>
-  railway-monitor works!
-</p>
+<div fxLayout="column" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutAlign="center center">
+      <button class="add-button" mat-fab color="primary" (click)="create()">
+          <mat-icon>add</mat-icon>
+        </button>
+  </div>
+  <mat-accordion>
+    <app-railway-monitor-card *ngFor="let item of monitor" [monitor]="item"></app-railway-monitor-card>
+  </mat-accordion>
+</div>

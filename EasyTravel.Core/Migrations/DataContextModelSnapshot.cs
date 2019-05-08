@@ -316,6 +316,8 @@ namespace EasyTravel.Core.Migrations
 
                     b.Property<bool>("IsSuccessful");
 
+                    b.Property<int>("MinPlaces");
+
                     b.Property<string>("To");
 
                     b.Property<string>("UserId");
@@ -369,6 +371,10 @@ namespace EasyTravel.Core.Migrations
                     b.Property<bool>("IsInProcess");
 
                     b.Property<bool>("IsSuccessful");
+
+                    b.Property<int>("MinPlaces");
+
+                    b.Property<string>("PlacesType");
 
                     b.Property<string>("To");
 

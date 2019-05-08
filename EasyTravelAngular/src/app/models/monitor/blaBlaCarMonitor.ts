@@ -8,4 +8,6 @@ export class BlaBlaCarMonitor {
     isInProcess: boolean;
     IsSuccessful: boolean;
     trips: Trip[];
+
+    constructor() {}
 }
