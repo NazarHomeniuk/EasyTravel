@@ -21,8 +21,9 @@ namespace EasyTravel.Core.Migrations
 
             modelBuilder.Entity("EasyTravel.Core.Models.BlaBlaCar.Car", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Comfort");
 
@@ -134,7 +135,7 @@ namespace EasyTravel.Core.Migrations
 
                     b.Property<int?>("BlaBlaCarMonitoringId");
 
-                    b.Property<string>("CarId");
+                    b.Property<int?>("CarId");
 
                     b.Property<DateTime>("DepartureDate");
 

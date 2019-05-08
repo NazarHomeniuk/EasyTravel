@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyTravel.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190507202750_ModifiedUserModel")]
-    partial class ModifiedUserModel
+    [Migration("20190508211500_AddedNewModels")]
+    partial class AddedNewModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,8 +23,11 @@ namespace EasyTravel.Core.Migrations
 
             modelBuilder.Entity("EasyTravel.Core.Models.BlaBlaCar.Car", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CarId");
 
                     b.Property<string>("Comfort");
 
@@ -134,9 +137,9 @@ namespace EasyTravel.Core.Migrations
 
                     b.Property<int?>("ArrivalPlaceId");
 
-                    b.Property<int>("BlaBlaCarMonitoringId");
+                    b.Property<int?>("BlaBlaCarMonitoringId");
 
-                    b.Property<string>("CarId");
+                    b.Property<int?>("CarId");
 
                     b.Property<DateTime>("DepartureDate");
 
@@ -189,7 +192,7 @@ namespace EasyTravel.Core.Migrations
 
                     b.Property<string>("BusCode");
 
-                    b.Property<int>("BusMonitoringId");
+                    b.Property<int?>("BusMonitoringId");
 
                     b.Property<string>("BusName");
 
@@ -318,6 +321,8 @@ namespace EasyTravel.Core.Migrations
 
                     b.Property<bool>("IsSuccessful");
 
+                    b.Property<int>("MinPlaces");
+
                     b.Property<string>("To");
 
                     b.Property<string>("UserId");
@@ -371,6 +376,10 @@ namespace EasyTravel.Core.Migrations
                     b.Property<bool>("IsInProcess");
 
                     b.Property<bool>("IsSuccessful");
+
+                    b.Property<int>("MinPlaces");
+
+                    b.Property<string>("PlacesType");
 
                     b.Property<string>("To");
 
@@ -457,7 +466,7 @@ namespace EasyTravel.Core.Migrations
 
                     b.Property<string>("Num");
 
-                    b.Property<int>("RailwayMonitoringId");
+                    b.Property<int?>("RailwayMonitoringId");
 
                     b.Property<int?>("ToId");
 
@@ -617,8 +626,7 @@ namespace EasyTravel.Core.Migrations
 
                     b.HasOne("EasyTravel.Core.Models.Monitoring.BlaBlaCarMonitoring")
                         .WithMany("Trips")
-                        .HasForeignKey("BlaBlaCarMonitoringId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BlaBlaCarMonitoringId");
 
                     b.HasOne("EasyTravel.Core.Models.BlaBlaCar.Car", "Car")
                         .WithMany()
@@ -647,10 +655,9 @@ namespace EasyTravel.Core.Migrations
 
             modelBuilder.Entity("EasyTravel.Core.Models.Bus.Trip", b =>
                 {
-                    b.HasOne("EasyTravel.Core.Models.Monitoring.BusMonitoring", "Monitoring")
+                    b.HasOne("EasyTravel.Core.Models.Monitoring.BusMonitoring")
                         .WithMany("Trips")
-                        .HasForeignKey("BusMonitoringId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BusMonitoringId");
                 });
 
             modelBuilder.Entity("EasyTravel.Core.Models.Monitoring.BlaBlaCarMonitoring", b =>
@@ -684,10 +691,9 @@ namespace EasyTravel.Core.Migrations
                         .WithMany()
                         .HasForeignKey("FromId");
 
-                    b.HasOne("EasyTravel.Core.Models.Monitoring.RailwayMonitoring", "Monitoring")
+                    b.HasOne("EasyTravel.Core.Models.Monitoring.RailwayMonitoring")
                         .WithMany("Trips")
-                        .HasForeignKey("RailwayMonitoringId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("RailwayMonitoringId");
 
                     b.HasOne("EasyTravel.Core.Models.Railway.Station", "To")
                         .WithMany()

@@ -7,12 +7,17 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190505104107_AddedNewModels.cs" />
     <Compile Remove="Migrations\20190505114218_AddedNewModels.cs" />
+    <Compile Remove="Migrations\20190505123845_AddedNewModels.cs" />
     <Compile Remove="Migrations\20190506182901_AddedIdentityModels.cs" />
     <Compile Remove="Migrations\20190506190757_AddedIdentityModels.cs" />
     <Compile Remove="Migrations\20190506190959_AddedIdentityClaimsModel.cs" />
+    <Compile Remove="Migrations\20190506193518_AddedIdentity.cs" />
     <Compile Remove="Migrations\20190507192204_ModifiedUserModel.cs" />
     <Compile Remove="Migrations\20190507200859_ModifiedUserModel.cs" />
     <Compile Remove="Migrations\20190507202339_ModifiedMonitoringModels.cs" />
+    <Compile Remove="Migrations\20190507202750_ModifiedUserModel.cs" />
+    <Compile Remove="Migrations\20190508095831_ModifiedMonitoringField.cs" />
+    <Compile Remove="Migrations\20190508211215_AddedMonitoringModels.cs" />
   </ItemGroup>
 
   <ItemGroup>

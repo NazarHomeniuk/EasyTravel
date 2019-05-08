@@ -4,8 +4,8 @@ namespace EasyTravel.Core.Models.BlaBlaCar
 {
     public class Car
     {
-        [JsonProperty("id")]
-        public string Id { get; set; }
+        [JsonIgnore]
+        public int Id { get; set; }
         [JsonProperty("model")]
         public string Model { get; set; }
         [JsonProperty("make")]

@@ -6,6 +6,7 @@ using EasyTravel.Core.Data;
 using EasyTravel.Core.Models.Bus;
 using EasyTravel.Core.Models.Monitoring;
 using EasyTravel.Services.Bus;
+using EasyTravel.Smtp.Services;
 using Hangfire;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,11 +16,13 @@ namespace EasyTravel.HangFire.Jobs.Bus
     {
         private readonly ITripFinder tripFinder;
         private readonly DataContext dataContext;
+        private readonly SmtpService smtpService;
 
-        public BusJob(BusFinder tripFinder, DataContext dataContext)
+        public BusJob(BusFinder tripFinder, DataContext dataContext, SmtpService smtpService)
         {
             this.dataContext = dataContext;
             this.tripFinder = tripFinder;
+            this.smtpService = smtpService;
         }
 
         public async Task FindTrips(BusMonitoring monitoring)
@@ -51,6 +54,8 @@ namespace EasyTravel.HangFire.Jobs.Bus
                 monitoringResult.Trips = trips;
                 dataContext.Entry(monitoringResult).State = EntityState.Modified;
                 await dataContext.SaveChangesAsync();
+                var user = await dataContext.Users.FindAsync(monitoringResult.UserId);
+                smtpService.SendBusNotification(monitoringResult, user.Email);
                 RecurringJob.RemoveIfExists(monitoring.Guid);
             }
         }

@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EasyTravel.Contracts\EasyTravel.Contracts.csproj" />
     <ProjectReference Include="..\EasyTravel.Services\EasyTravel.Services.csproj" />
+    <ProjectReference Include="..\EasyTravel.Smtp\EasyTravel.Smtp.csproj" />
   </ItemGroup>
 
 </Project>

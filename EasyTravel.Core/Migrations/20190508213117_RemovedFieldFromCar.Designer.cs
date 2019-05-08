@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyTravel.Core.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190506193518_AddedIdentity")]
-    partial class AddedIdentity
+    [Migration("20190508213117_RemovedFieldFromCar")]
+    partial class RemovedFieldFromCar
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,8 +23,9 @@ namespace EasyTravel.Core.Migrations
 
             modelBuilder.Entity("EasyTravel.Core.Models.BlaBlaCar.Car", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Comfort");
 
@@ -134,9 +135,9 @@ namespace EasyTravel.Core.Migrations
 
                     b.Property<int?>("ArrivalPlaceId");
 
-                    b.Property<int>("BlaBlaCarMonitoringId");
+                    b.Property<int?>("BlaBlaCarMonitoringId");
 
-                    b.Property<string>("CarId");
+                    b.Property<int?>("CarId");
 
                     b.Property<DateTime>("DepartureDate");
 
@@ -189,7 +190,7 @@ namespace EasyTravel.Core.Migrations
 
                     b.Property<string>("BusCode");
 
-                    b.Property<int>("BusMonitoringId");
+                    b.Property<int?>("BusMonitoringId");
 
                     b.Property<string>("BusName");
 
@@ -251,6 +252,57 @@ namespace EasyTravel.Core.Migrations
                     b.ToTable("GeoNames");
                 });
 
+            modelBuilder.Entity("EasyTravel.Core.Models.Identity.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
             modelBuilder.Entity("EasyTravel.Core.Models.Monitoring.BlaBlaCarMonitoring", b =>
                 {
                     b.Property<int>("Id")
@@ -261,13 +313,21 @@ namespace EasyTravel.Core.Migrations
 
                     b.Property<string>("From");
 
+                    b.Property<string>("Guid");
+
                     b.Property<bool>("IsInProcess");
 
                     b.Property<bool>("IsSuccessful");
 
+                    b.Property<int>("MinPlaces");
+
                     b.Property<string>("To");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("BlaBlaCarMonitoring");
                 });
@@ -282,13 +342,19 @@ namespace EasyTravel.Core.Migrations
 
                     b.Property<string>("From");
 
+                    b.Property<string>("Guid");
+
                     b.Property<bool>("IsInProcess");
 
                     b.Property<bool>("IsSuccessful");
 
                     b.Property<string>("To");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("BusMonitoring");
                 });
@@ -303,13 +369,23 @@ namespace EasyTravel.Core.Migrations
 
                     b.Property<string>("From");
 
+                    b.Property<string>("Guid");
+
                     b.Property<bool>("IsInProcess");
 
                     b.Property<bool>("IsSuccessful");
 
+                    b.Property<int>("MinPlaces");
+
+                    b.Property<string>("PlacesType");
+
                     b.Property<string>("To");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("RailwayMonitoring");
                 });
@@ -388,7 +464,7 @@ namespace EasyTravel.Core.Migrations
 
                     b.Property<string>("Num");
 
-                    b.Property<int>("RailwayMonitoringId");
+                    b.Property<int?>("RailwayMonitoringId");
 
                     b.Property<int?>("ToId");
 
@@ -474,57 +550,6 @@ namespace EasyTravel.Core.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -599,8 +624,7 @@ namespace EasyTravel.Core.Migrations
 
                     b.HasOne("EasyTravel.Core.Models.Monitoring.BlaBlaCarMonitoring")
                         .WithMany("Trips")
-                        .HasForeignKey("BlaBlaCarMonitoringId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BlaBlaCarMonitoringId");
 
                     b.HasOne("EasyTravel.Core.Models.BlaBlaCar.Car", "Car")
                         .WithMany()
@@ -629,10 +653,30 @@ namespace EasyTravel.Core.Migrations
 
             modelBuilder.Entity("EasyTravel.Core.Models.Bus.Trip", b =>
                 {
-                    b.HasOne("EasyTravel.Core.Models.Monitoring.BusMonitoring", "Monitoring")
+                    b.HasOne("EasyTravel.Core.Models.Monitoring.BusMonitoring")
                         .WithMany("Trips")
-                        .HasForeignKey("BusMonitoringId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BusMonitoringId");
+                });
+
+            modelBuilder.Entity("EasyTravel.Core.Models.Monitoring.BlaBlaCarMonitoring", b =>
+                {
+                    b.HasOne("EasyTravel.Core.Models.Identity.User")
+                        .WithMany("BlaBlaCarMonitoring")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("EasyTravel.Core.Models.Monitoring.BusMonitoring", b =>
+                {
+                    b.HasOne("EasyTravel.Core.Models.Identity.User")
+                        .WithMany("BusMonitoring")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("EasyTravel.Core.Models.Monitoring.RailwayMonitoring", b =>
+                {
+                    b.HasOne("EasyTravel.Core.Models.Identity.User")
+                        .WithMany("RailwayMonitoring")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("EasyTravel.Core.Models.Railway.Train", b =>
@@ -645,10 +689,9 @@ namespace EasyTravel.Core.Migrations
                         .WithMany()
                         .HasForeignKey("FromId");
 
-                    b.HasOne("EasyTravel.Core.Models.Monitoring.RailwayMonitoring", "Monitoring")
+                    b.HasOne("EasyTravel.Core.Models.Monitoring.RailwayMonitoring")
                         .WithMany("Trips")
-                        .HasForeignKey("RailwayMonitoringId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("RailwayMonitoringId");
 
                     b.HasOne("EasyTravel.Core.Models.Railway.Station", "To")
                         .WithMany()
@@ -673,7 +716,7 @@ namespace EasyTravel.Core.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("EasyTravel.Core.Models.Identity.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -681,7 +724,7 @@ namespace EasyTravel.Core.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("EasyTravel.Core.Models.Identity.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -694,7 +737,7 @@ namespace EasyTravel.Core.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("EasyTravel.Core.Models.Identity.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -702,7 +745,7 @@ namespace EasyTravel.Core.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser")
+                    b.HasOne("EasyTravel.Core.Models.Identity.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

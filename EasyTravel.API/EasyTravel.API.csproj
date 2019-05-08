@@ -16,6 +16,7 @@
     <ProjectReference Include="..\EasyTravel.Core\EasyTravel.Core.csproj" />
     <ProjectReference Include="..\EasyTravel.HangFire\EasyTravel.HangFire.csproj" />
     <ProjectReference Include="..\EasyTravel.Services\EasyTravel.Services.csproj" />
+    <ProjectReference Include="..\EasyTravel.Smtp\EasyTravel.Smtp.csproj" />
   </ItemGroup>
 
 </Project>

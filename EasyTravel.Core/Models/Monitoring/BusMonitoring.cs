@@ -15,5 +15,6 @@ namespace EasyTravel.Core.Models.Monitoring
         public List<Trip> Trips { get; set; }
         public bool IsInProcess { get; set; }
         public bool IsSuccessful { get; set; }
+        public string UserId { get; set; }
     }
 }
