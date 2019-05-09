@@ -18,6 +18,18 @@ namespace EasyTravel.Smtp.Services
             from = new MailAddress(smtpConfig.Email, smtpConfig.Sender);
         }
 
+        public void SendVerificationCode(int code, string email)
+        {
+            var to = new MailAddress(email);
+            var message = new MailMessage(from, to)
+            {
+                Subject = "Підтвердження електронної пошти",
+                Body = $"Код підтвердження: {code}",
+                IsBodyHtml = true
+            };
+            SendEmail(message);
+        }
+
         public void SendBusNotification(BusMonitoring busMonitoring, string email)
         {
             var to = new MailAddress(email);

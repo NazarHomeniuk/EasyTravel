@@ -13,7 +13,7 @@ export class BlaBlaCarMonitorComponent implements OnInit {
 
   monitor: BlaBlaCarMonitor[];
 
-  constructor(private monitorService: BlaBlaCarMonitorService,  private dialog: MatDialog) { }
+  constructor(private monitorService: BlaBlaCarMonitorService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.monitorService.getAll().subscribe(data => {

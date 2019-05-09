@@ -97,7 +97,8 @@ namespace EasyTravel.API
                     {
                         ValidIssuer = Configuration["Authentication:Issuer"],
                         ValidAudience = Configuration["Authentication:Issuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:Key"]))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:Key"])),
+                        RequireExpirationTime = false
                     };
                 });
             services.AddHangfire(x => x.UseSqlServerStorage(connectionString));

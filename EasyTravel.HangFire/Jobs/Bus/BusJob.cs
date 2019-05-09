@@ -58,8 +58,16 @@ namespace EasyTravel.HangFire.Jobs.Bus
                 dataContext.Entry(monitoringResult).State = EntityState.Modified;
                 await dataContext.SaveChangesAsync();
                 var user = await dataContext.Users.FindAsync(monitoringResult.UserId);
-                smtpService.SendBusNotification(monitoringResult, user.Email);
-                smsService.SendBusNotification(monitoringResult, user.PhoneNumber);
+                if (user.EmailNotificationEnabled)
+                {
+                    smtpService.SendBusNotification(monitoringResult, user.Email);
+                }
+
+                if (user.SmsNotificationEnabled)
+                {
+                    smsService.SendBusNotification(monitoringResult, user.PhoneNumber);
+                }
+
                 RecurringJob.RemoveIfExists(monitoring.Guid);
             }
         }

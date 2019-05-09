@@ -19,6 +19,15 @@ namespace EasyTravel.Sms.Services
             twilioRestClient = new TwilioRestClient(smsConfig.Sid, smsConfig.Token);
         }
 
+        public void SendVerificationCode(int code, string phoneNumber)
+        {
+            MessageResource.Create(
+                from: new PhoneNumber(smsConfig.Number),
+                to: new PhoneNumber(phoneNumber),
+                body: $"Код підтвердження: {code}",
+                client: twilioRestClient);
+        }
+
         public void SendBusNotification(BusMonitoring busMonitoring, string phoneNumber)
         {
             var stringBuilder = new StringBuilder();

@@ -6,3 +6,4 @@ export { UserService } from './auth/user.service';
 export { RailwayMonitorService } from './monitor/railway-monitor.service';
 export { BusMonitorService } from './monitor/bus-monitor.service';
 export { BlaBlaCarMonitorService } from './monitor/bla-bla-car-monitor.service';
+export { ProfileService } from './profile/profile.service';

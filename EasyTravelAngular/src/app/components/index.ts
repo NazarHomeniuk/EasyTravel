@@ -20,3 +20,5 @@ export { BlaBlaCarMonitorCardComponent } from "./dashboard/monitor/bla-bla-car-m
 export { RailwayMonitorDialogComponent } from "./dashboard/monitor/railway-monitor/railway-monitor-dialog/railway-monitor-dialog.component";
 export { BusMonitorDialogComponent } from "./dashboard/monitor/bus-monitor/bus-monitor-dialog/bus-monitor-dialog.component";
 export { BlaBlaCarMonitorDialogComponent } from "./dashboard/monitor/bla-bla-car-monitor/bla-bla-car-monitor-dialog/bla-bla-car-monitor-dialog.component";
+export { ProfileComponent } from "./dashboard/profile/profile.component";
+export { ConfirmCodeComponent } from "./dashboard/profile/confirm-code/confirm-code.component";

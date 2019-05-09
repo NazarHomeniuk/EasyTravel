@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <div fxLayout="row">
+    <h1 class="mat-h1 header">Введіть код підтвердження</h1>
+    <mat-icon class="close" color="primary">close</mat-icon>
+  </div>
+  <div fxLayout="row">
+    <div fxLayout="column">
+      <mat-form-field appearance="legacy">
+        <mat-label>Код</mat-label>
+        <input matInput [formControl]="codeInput" placeholder="Код">
+        <mat-icon matSuffix>vpn_key</mat-icon>
+        <mat-error *ngIf="codeInput.invalid">Поле обов'язкове</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout="row">
+      <button mat-flat-button color="primary" [disabled]="codeInput.invalid" (click)="verify()">Підтвердити</button>
+    </div>
+</div>

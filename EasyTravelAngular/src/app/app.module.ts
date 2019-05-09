@@ -28,6 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { MustMatchDirective } from './directives/index';
 
@@ -57,7 +58,9 @@ import {
   BlaBlaCarMonitorCardComponent,
   RailwayMonitorDialogComponent,
   BlaBlaCarMonitorDialogComponent,
-  BusMonitorDialogComponent
+  BusMonitorDialogComponent,
+  ProfileComponent,
+  ConfirmCodeComponent
 } from './components/';
 
 import { 
@@ -68,7 +71,8 @@ import {
   UserService, 
   BusMonitorService,
   BlaBlaCarMonitorService,
-  RailwayMonitorService
+  RailwayMonitorService,
+  ProfileService
 } from './services';
 
 @NgModule({
@@ -96,7 +100,9 @@ import {
     RailwayMonitorComponent,
     RailwayMonitorDialogComponent,
     BusMonitorDialogComponent,
-    BlaBlaCarMonitorDialogComponent
+    BlaBlaCarMonitorDialogComponent,
+    ProfileComponent,
+    ConfirmCodeComponent
   ],
   imports: [
     BrowserModule,
@@ -125,7 +131,8 @@ import {
     MatSnackBarModule,
     MatTabsModule,
     MatDividerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSlideToggleModule
   ],
   providers: [
     LocationsService,
@@ -138,6 +145,7 @@ import {
     RailwayMonitorService,
     BusMonitorService,
     BlaBlaCarMonitorService,
+    ProfileService,
     { provide: MAT_DATE_LOCALE, useValue: 'uk-UA' },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
@@ -145,7 +153,8 @@ import {
   entryComponents: [ 
     RailwayMonitorDialogComponent,
     BusMonitorDialogComponent,
-    BlaBlaCarMonitorDialogComponent
+    BlaBlaCarMonitorDialogComponent,
+    ConfirmCodeComponent
   ],
   bootstrap: [AppComponent]
 })
