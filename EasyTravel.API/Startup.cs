@@ -13,6 +13,7 @@ using EasyTravel.Services.Bus;
 using EasyTravel.Services.Helpers;
 using EasyTravel.Services.Http;
 using EasyTravel.Services.Railway;
+using EasyTravel.Sms.Services;
 using EasyTravel.Smtp.Services;
 using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -48,11 +49,13 @@ namespace EasyTravel.API
             services.Configure<HangFireConfig>(Configuration.GetSection("HangFire"));
             services.Configure<IdentityConfig>(Configuration.GetSection("Authentication"));
             services.Configure<SmtpConfig>(Configuration.GetSection("Smtp"));
+            services.Configure<SmsConfig>(Configuration.GetSection("Sms"));
 
             services.AddTransient<BlaBlaCarFinder>();
             services.AddTransient<RailwayFinder>();
             services.AddTransient<BusFinder>();
             services.AddTransient<SmtpService>();
+            services.AddTransient<SmsService>();
             services.AddTransient<IRailwayMonitoringService, RailwayMonitoringService>();
             services.AddTransient<IBusMonitoringService, BusMonitoringService>();
             services.AddTransient<IBlaBlaCarMonitoringService, BlaBlaCarMonitoringService>();

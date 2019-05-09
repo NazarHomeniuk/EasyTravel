@@ -6,6 +6,7 @@ using EasyTravel.Core.Data;
 using EasyTravel.Core.Models.BlaBlaCar;
 using EasyTravel.Core.Models.Monitoring;
 using EasyTravel.Services.BlaBlaCar;
+using EasyTravel.Sms.Services;
 using EasyTravel.Smtp.Services;
 using Hangfire;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +18,14 @@ namespace EasyTravel.HangFire.Jobs.BlaBlaCar
         private readonly ITripFinder tripFinder;
         private readonly DataContext dataContext;
         private readonly SmtpService smtpService;
+        private readonly SmsService smsService;
 
-        public BlaBlaCarJob(BlaBlaCarFinder tripFinder, DataContext dataContext, SmtpService smtpService)
+        public BlaBlaCarJob(BlaBlaCarFinder tripFinder, DataContext dataContext, SmtpService smtpService, SmsService smsService)
         {
             this.dataContext = dataContext;
             this.tripFinder = tripFinder;
             this.smtpService = smtpService;
+            this.smsService = smsService;
         }
 
         public async Task FindTrips(BlaBlaCarMonitoring monitoring)
@@ -57,6 +60,7 @@ namespace EasyTravel.HangFire.Jobs.BlaBlaCar
                 await dataContext.SaveChangesAsync();
                 var user = await dataContext.Users.FindAsync(monitoringResult.UserId);
                 smtpService.SendBlaBlaCarNotification(monitoringResult, user.Email);
+                smsService.SendBlaBlaCarNotification(monitoringResult, user.PhoneNumber);
                 RecurringJob.RemoveIfExists(monitoring.Guid);
             }
         }

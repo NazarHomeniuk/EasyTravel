@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyTravel.Services", "Easy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyTravel.HangFire", "EasyTravel.HangFire\EasyTravel.HangFire.csproj", "{87254A3E-E1AB-49F2-A2E9-A496EC7445BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTravel.Smtp", "EasyTravel.Smtp\EasyTravel.Smtp.csproj", "{537B0279-5B74-4181-8032-C5C40DF6F9BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyTravel.Smtp", "EasyTravel.Smtp\EasyTravel.Smtp.csproj", "{537B0279-5B74-4181-8032-C5C40DF6F9BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyTravel.Sms", "EasyTravel.Sms\EasyTravel.Sms.csproj", "{0A8FCA84-D8A7-4B78-A03E-A1C917809C8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{537B0279-5B74-4181-8032-C5C40DF6F9BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{537B0279-5B74-4181-8032-C5C40DF6F9BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{537B0279-5B74-4181-8032-C5C40DF6F9BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A8FCA84-D8A7-4B78-A03E-A1C917809C8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A8FCA84-D8A7-4B78-A03E-A1C917809C8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A8FCA84-D8A7-4B78-A03E-A1C917809C8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A8FCA84-D8A7-4B78-A03E-A1C917809C8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

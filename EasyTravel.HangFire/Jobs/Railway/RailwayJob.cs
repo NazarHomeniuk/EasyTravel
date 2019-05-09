@@ -6,6 +6,7 @@ using EasyTravel.Core.Data;
 using EasyTravel.Core.Models.Monitoring;
 using EasyTravel.Core.Models.Railway;
 using EasyTravel.Services.Railway;
+using EasyTravel.Sms.Services;
 using EasyTravel.Smtp.Services;
 using Hangfire;
 using Microsoft.EntityFrameworkCore;
@@ -17,12 +18,14 @@ namespace EasyTravel.HangFire.Jobs.Railway
         private readonly ITripFinder tripFinder;
         private readonly DataContext dataContext;
         private readonly SmtpService smtpService;
+        private readonly SmsService smsService;
 
-        public RailwayJob(RailwayFinder tripFinder, DataContext dataContext, SmtpService smtpService)
+        public RailwayJob(RailwayFinder tripFinder, DataContext dataContext, SmtpService smtpService, SmsService smsService)
         {
             this.dataContext = dataContext;
             this.tripFinder = tripFinder;
             this.smtpService = smtpService;
+            this.smsService = smsService;
         }
 
         public async Task FindTrips(RailwayMonitoring monitoring)
@@ -64,6 +67,7 @@ namespace EasyTravel.HangFire.Jobs.Railway
                     await dataContext.SaveChangesAsync();
                     var user = await dataContext.Users.FindAsync(monitoringResult.UserId);
                     smtpService.SendRailwayNotification(monitoringResult, user.Email);
+                    smsService.SendRailwayNotification(monitoringResult, user.PhoneNumber);
                     RecurringJob.RemoveIfExists(monitoring.Guid);
                 }
             }
