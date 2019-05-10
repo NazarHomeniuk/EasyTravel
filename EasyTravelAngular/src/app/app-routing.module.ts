@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent, FindComponent, AuthComponent, LoginComponent, RegisterComponent, MonitorComponent, ProfileComponent } from './components';
-import { AuthGuardService } from './guards';
+import { AuthGuardService, AuthorizedGuardService } from './guards';
 
 const routes: Routes = [
   {
-    path: '', component: AuthComponent, children: [
+    path: '', component: AuthComponent, canActivate: [AuthorizedGuardService], children: [
       { path: "", redirectTo: "/login", pathMatch: "full" },
       {
         path: 'login',

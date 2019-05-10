@@ -3,7 +3,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule  } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -32,11 +32,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { MustMatchDirective } from './directives/index';
 
-import { AuthGuardService } from './guards/auth-guard.service';
-
 import { JwtInterceptor, ErrorInterceptor } from './helpers';
 
-import { 
+import {
   DashboardComponent,
   FindComponent,
   FindFormComponent,
@@ -63,17 +61,22 @@ import {
   ConfirmCodeComponent
 } from './components/';
 
-import { 
+import {
   LocationsService,
   RailwayService,
   BlaBlaCarService,
   BusService,
-  UserService, 
+  UserService,
   BusMonitorService,
   BlaBlaCarMonitorService,
   RailwayMonitorService,
   ProfileService
 } from './services';
+
+import {
+  AuthorizedGuardService,
+  AuthGuardService
+} from './guards';
 
 @NgModule({
   declarations: [
@@ -142,6 +145,7 @@ import {
     MatDatepickerModule,
     UserService,
     AuthGuardService,
+    AuthorizedGuardService,
     RailwayMonitorService,
     BusMonitorService,
     BlaBlaCarMonitorService,
@@ -150,7 +154,7 @@ import {
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
-  entryComponents: [ 
+  entryComponents: [
     RailwayMonitorDialogComponent,
     BusMonitorDialogComponent,
     BlaBlaCarMonitorDialogComponent,
