@@ -5,7 +5,7 @@ export class BusMonitor {
     to: string;
     departureDate: Date;
     isInProcess: boolean;
-    IsSuccessful: boolean;
+    isSuccessful: boolean;
     trips: BusTrip[];
 
     constructor() {}

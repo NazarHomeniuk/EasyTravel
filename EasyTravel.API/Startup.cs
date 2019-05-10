@@ -1,4 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using EasyTravel.Contracts.Interfaces.Helpers;
 using EasyTravel.Contracts.Interfaces.Services;
@@ -98,7 +99,7 @@ namespace EasyTravel.API
                         ValidIssuer = Configuration["Authentication:Issuer"],
                         ValidAudience = Configuration["Authentication:Issuer"],
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:Key"])),
-                        RequireExpirationTime = false
+                        ClockSkew = TimeSpan.FromDays(1)
                     };
                 });
             services.AddHangfire(x => x.UseSqlServerStorage(connectionString));

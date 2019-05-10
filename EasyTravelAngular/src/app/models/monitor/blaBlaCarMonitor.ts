@@ -6,7 +6,7 @@ export class BlaBlaCarMonitor {
     departureDate: Date;
     minPlaces: number;
     isInProcess: boolean;
-    IsSuccessful: boolean;
+    isSuccessful: boolean;
     trips: Trip[];
 
     constructor() {}
