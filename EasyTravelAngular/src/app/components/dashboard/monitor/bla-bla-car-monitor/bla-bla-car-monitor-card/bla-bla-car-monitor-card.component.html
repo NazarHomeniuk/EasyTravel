@@ -12,39 +12,37 @@
       {{monitor.departureDate | date:'dd.MM.yyyy HH:mm'}}
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <mat-list>
-    <mat-list-item *ngFor="let trip of monitor.trips">
-      <div class="trip-list">
-        <mat-divider></mat-divider>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div fxLayout="column" fxFlex="35">
-            {{trip.departure_place.city_name}} - {{trip.arrival_place.city_name}}
+  <div *ngFor="let trip of monitor.trips">
+    <div class="trip-list">
+      <mat-divider></mat-divider>
+      <div fxLayout="row wrap" class="trip" fxLayout.xs="column" fxLayoutAlign="space-between center">
+        <div fxFlex="25">
+          {{trip.departure_place.city_name}} - {{trip.arrival_place.city_name}}
+        </div>
+        <div fxFlex="25" fxLayoutGap="2px">
+          <div class="row">
+            Дата відправлення: <strong>{{trip.departure_date | date:'dd.MM.yyyy HH:mm'}}</strong>
           </div>
-          <div fxLayout="column" fxFlex="30" fxLayoutGap="2px">
-            <div class="row">
-              Дата відправлення: <strong>{{trip.departure_date | date:'dd.MM.yyyy HH:mm'}}</strong>
-            </div>
-            <div class="row">
-              Дата прибуття: <strong>{{trip.arrival_date | date:'dd.MM.yyyy HH:mm'}}</strong>
-            </div>
-          </div>
-          <div fxLayout="column" fxFlex="15">
-            <div *ngIf="trip.car != null">{{trip.car.make}} {{trip.car.model}}</div>
-          </div>
-          <div fxLayout="column" fxFlex="10">
-              <div *ngIf="trip.price != null">{{trip.price.value}} грн</div>
-          </div>
-          <div fxLayout="column" fxFlex="10">
-            <div class="row">
-              <mat-icon>airline_seat_recline_normal</mat-icon>
-              {{trip.seats_left}}
-            </div>
-          </div>
-          <div fxLayout="column" fxFlex="15">
-            <a href="{{trip.links._front}}" target="_blank" mat-flat-button color="warn">Забронювати</a>
+          <div class="row">
+            Дата прибуття: <strong>{{trip.arrival_date | date:'dd.MM.yyyy HH:mm'}}</strong>
           </div>
         </div>
+        <div fxFlex="15">
+          <div *ngIf="trip.car != null">{{trip.car.make}} {{trip.car.model}}</div>
+        </div>
+        <div fxFlex="10">
+          <div *ngIf="trip.price != null">{{trip.price.value}} грн</div>
+        </div>
+        <div fxFlex="10">
+          <div class="row">
+            <mat-icon>airline_seat_recline_normal</mat-icon>
+            {{trip.seats_left}}
+          </div>
+        </div>
+        <div fxFlex="15">
+          <a href="{{trip.links._front}}" target="_blank" mat-flat-button color="warn">Забронювати</a>
+        </div>
       </div>
-    </mat-list-item>
-  </mat-list>
+    </div>
+  </div>
 </mat-expansion-panel>

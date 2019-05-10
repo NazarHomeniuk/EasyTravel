@@ -1,41 +1,39 @@
 <mat-expansion-panel [disabled]="monitor.isInProcess || !monitor.isSuccessful">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <div fxLayout="row" fxLayoutGap="10px">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <div fxLayout="row" fxLayoutGap="10px">
         <mat-icon color="{{monitor.isInProcess ? 'loop' : monitor.isSuccessful ? 'primary' : 'warn'}}">
           {{monitor.isInProcess ? 'loop' : monitor.isSuccessful ? 'done_all' : 'not_interested'}}
         </mat-icon>
         <div>{{monitor.from}} - {{monitor.to}}</div>
+      </div>
+    </mat-panel-title>
+    <mat-panel-description>
+      {{monitor.departureDate | date:'dd.MM.yyyy HH:mm'}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div *ngFor="let trip of monitor.trips">
+    <div class="trip-list">
+      <mat-divider></mat-divider>
+      <div fxLayout="row wrap" class="trip" fxLayout.xs="column" fxLayoutAlign="space-between center">
+        <div fxLayout="column" fxFlex="35">
+          {{trip.busName}}
         </div>
-      </mat-panel-title>
-      <mat-panel-description>
-        {{monitor.departureDate | date:'dd.MM.yyyy HH:mm'}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <mat-list>
-      <mat-list-item *ngFor="let trip of monitor.trips">
-        <div class="trip-list">
-          <mat-divider></mat-divider>
-          <div fxLayout="row" fxLayoutAlign="space-between center">
-            <div fxLayout="column" fxFlex="35">
-              {{trip.busName}}
-            </div>
-            <div fxLayout="column" fxFlex="35" fxLayoutGap="2px">
-              <div class="row">
-                Дата відправлення: <strong>{{trip.departureDate | date:'dd.MM.yyyy HH:mm'}}</strong>
-              </div>
-              <div class="row">
-                Дата прибуття: <strong>{{trip.arrivalDate | date:'dd.MM.yyyy HH:mm'}}</strong>
-              </div>
-            </div>
-            <div fxLayout="column" fxFlex="15">
-              {{trip.price}} грн
-            </div>
-            <div fxLayout="column" fxFlex="15">
-              <a href="{{trip.bookingLink}}" target="_blank" mat-flat-button color="warn">Забронювати</a>
-            </div>
+        <div fxLayout="column" fxFlex="35" fxLayoutGap="2px">
+          <div class="row">
+            Дата відправлення: <strong>{{trip.departureDate | date:'dd.MM.yyyy HH:mm'}}</strong>
+          </div>
+          <div class="row">
+            Дата прибуття: <strong>{{trip.arrivalDate | date:'dd.MM.yyyy HH:mm'}}</strong>
           </div>
         </div>
-      </mat-list-item>
-    </mat-list>
-  </mat-expansion-panel>
+        <div fxLayout="column" fxFlex="15">
+          {{trip.price}} грн
+        </div>
+        <div fxLayout="column" fxFlex="15">
+          <a href="{{trip.bookingLink}}" target="_blank" mat-flat-button color="warn">Забронювати</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-expansion-panel>
