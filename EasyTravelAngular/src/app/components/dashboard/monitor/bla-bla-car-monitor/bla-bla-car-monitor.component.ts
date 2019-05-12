@@ -12,12 +12,15 @@ import { BlaBlaCarMonitorDialogComponent } from './bla-bla-car-monitor-dialog/bl
 export class BlaBlaCarMonitorComponent implements OnInit {
 
   monitor: BlaBlaCarMonitor[];
+  
+  isLoading = true;
 
   constructor(private monitorService: BlaBlaCarMonitorService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.monitorService.getAll().subscribe(data => {
       this.monitor = data;
+      this.isLoading = false;
     });
   }
 
@@ -29,8 +32,10 @@ export class BlaBlaCarMonitorComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.isLoading = true;
       this.monitorService.getAll().subscribe(data => {
         this.monitor = data;
+        this.isLoading = false;
       })
     });
   }

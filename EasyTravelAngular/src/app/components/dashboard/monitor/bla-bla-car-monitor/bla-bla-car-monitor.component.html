@@ -4,7 +4,11 @@
           <mat-icon>add</mat-icon>
         </button>
   </div>
-  <mat-accordion>
+  <div *ngIf="isLoading" class="loading-container" fxLayout="column" fxLayoutAlign="center center">
+      <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+      <h2>Зачекайте...</h2>
+    </div>
+  <mat-accordion *ngIf="!isLoading">
     <app-bla-bla-car-monitor-card *ngFor="let item of monitor" [monitor]="item"></app-bla-bla-car-monitor-card>
   </mat-accordion>
 </div>

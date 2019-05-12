@@ -13,3 +13,7 @@
 mat-accordion {
     margin-bottom: 30px;
 }
+
+.loading-container {
+    height: 100%;
+}

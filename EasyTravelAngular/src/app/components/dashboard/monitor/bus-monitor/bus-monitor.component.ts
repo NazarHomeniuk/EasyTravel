@@ -13,11 +13,14 @@ export class BusMonitorComponent implements OnInit {
 
   monitor: BusMonitor[];
 
+  isLoading = true;
+
   constructor(private monitorService: BusMonitorService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.monitorService.getAll().subscribe(data => {
       this.monitor = data;
+      this.isLoading = false;
     });
   }
 
@@ -29,8 +32,10 @@ export class BusMonitorComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.isLoading = true;
       this.monitorService.getAll().subscribe(data => {
         this.monitor = data;
+        this.isLoading = false;
       })
     });
   }
