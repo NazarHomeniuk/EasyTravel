@@ -22,3 +22,11 @@ mat-sidenav {
     bottom: 0;
     position: absolute;
 }
+
+.logo-extented {
+    width: 20%;
+}
+
+.logo-container {
+    width: 100%;
+}

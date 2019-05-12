@@ -1,7 +1,7 @@
 <mat-sidenav-container class="container">
     <mat-sidenav #sidenav mode="push">
         <mat-toolbar>
-            <img class="logo">
+            <img class="logo" src="./assets/images/logo.png">
             <span>Easy Travel</span>
         </mat-toolbar>
         <mat-nav-list>
@@ -28,6 +28,9 @@
             <button mat-icon-button (click)="sidenav.toggle()">
                 <mat-icon>apps</mat-icon>
             </button>
+            <div class="logo-container" fxLayout="row" fxLayoutAlign="center center">
+            <img class="logo-extented" src="./assets/images/logo-extented.png">
+            </div>
         </mat-toolbar>
         <router-outlet></router-outlet>
     </mat-sidenav-content>

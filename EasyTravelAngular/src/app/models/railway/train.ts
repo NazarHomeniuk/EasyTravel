@@ -6,8 +6,8 @@ export class Train {
     num: string;
     category: number;
     isTransformer: string;
-    departureDate: Date;
-    arrivalDate: Date;
+    departureDate: string;
+    arrivalDate: string;
     travelTime: string;
     from: Station;
     to: Station;

@@ -15,7 +15,7 @@ export class RailwayCardComponent implements OnInit {
   @Output() submitButton = new EventEmitter();
   @Input() from: string;
   @Input() to: string;
-  @Input() date: Date;
+  @Input() date: string;
   @Input() time: Time;
   trains: Train[];
   isLoading = true;
@@ -40,7 +40,7 @@ export class RailwayCardComponent implements OnInit {
     })
   }
 
-  refresh(from: string, to: string, date: Date, time: Time) {
+  refresh(from: string, to: string, date: string, time: Time) {
     this.from = from;
     this.to = to;
     this.date = date;

@@ -36,26 +36,22 @@ export class TripsComponent implements OnInit {
 
   submit(trip: BaseTrip) {
     var from, to, date, time;
-    console.log(trip);
     switch(trip.type) {
       case TripType.BlaBlaCar:
       from = trip.car.arrival_place.city_name;
       to = this.finishLocation;
-      date = new Date(trip.car.arrival_date);
       trip.arrivalDate = trip.car.arrival_date;
       trip.departureDate = trip.car.departure_date;
       break;
       case TripType.Bus:
       from = trip.bus.to;
       to = this.finishLocation;
-      date = new Date(trip.bus.arrivalDate);
       trip.arrivalDate = trip.bus.arrivalDate;
       trip.departureDate = trip.bus.departureDate;
       break;
       case TripType.Railway:
       from = trip.train.to.station;
       to = this.finishLocation;
-      date = new Date(trip.train.arrivalDate);
       trip.arrivalDate = trip.train.arrivalDate;
       trip.departureDate = trip.train.departureDate;
       break;
@@ -63,10 +59,8 @@ export class TripsComponent implements OnInit {
 
     if (this.trips.length > 0) {
       var previousTrip = this.trips[this.trips.length - 1];
-      console.log(previousTrip);
       let time = Math.floor((new Date(trip.departureDate).getTime() - new Date(previousTrip.arrivalDate).getTime())  / 1000 / 60 / 60);
       this.waitTime.push(time);
-      console.log(this.waitTime);
     }
 
     this.trips.push(trip);
@@ -76,9 +70,9 @@ export class TripsComponent implements OnInit {
       return;
     }
 
-    this.carComponent.refresh(from, to, date, time);
-    this.busCardComponent.refresh(from, to, date, time);
-    this.railwayComponent.refresh(from, to, date, time);
+    this.carComponent.refresh(from, to, trip.arrivalDate, time);
+    this.busCardComponent.refresh(from, to, trip.arrivalDate, time);
+    this.railwayComponent.refresh(from, to, trip.arrivalDate, time);
   }
 
 }

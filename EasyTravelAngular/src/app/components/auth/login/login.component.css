@@ -39,3 +39,16 @@ a:active {
 .mat-body {
   text-align: center;
   }
+
+  .logo {
+    margin-top: 5%;
+    width: 60%;
+  }
+
+  .logo-container {
+    height: 100%;
+  }
+
+  .container {
+    height: 100%;
+  }

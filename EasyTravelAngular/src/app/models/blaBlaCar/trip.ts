@@ -7,8 +7,8 @@ import { Car } from './car';
 
 export class Trip {
     links: Links;
-    departure_date: Date;
-    arrival_date: Date;
+    departure_date: string;
+    arrival_date: string;
     departure_place: Place;
     arrival_place: Place;
     price: Price;

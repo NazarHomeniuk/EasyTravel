@@ -45,9 +45,10 @@ export class BlaBlaCarMonitorDialogComponent implements OnInit {
     let time = this.timeInput.value;
     let hours = time.toString().split(':')[0];
     let minutes = time.toString().split(':')[1];
-    monitor.departureDate = this.dateInput.value;
-    monitor.departureDate.setHours(+hours);
-    monitor.departureDate.setMinutes(+minutes);
+    var date = this.dateInput.value;
+    date.setHours(+hours);
+    date.setMinutes(+minutes);
+    monitor.departureDate = date;
     this.blaBlaCarMonitorService.create(monitor).subscribe(data => {
       this.dialogRef.close();
     });

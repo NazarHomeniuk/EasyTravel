@@ -6,8 +6,8 @@ export class BusTrip {
     departureTime: Time;
     arrivalTime: Time;
     date: Date;
-    arrivalDate: Date;
-    departureDate: Date;
+    arrivalDate: string;
+    departureDate: string;
     distance: number;
     price: number;
     busName: string;
