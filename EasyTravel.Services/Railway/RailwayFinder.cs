@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,9 +53,9 @@ namespace EasyTravel.Services.Railway
             result.Data.List.RemoveAll(i => !i.Types.Any());
             foreach (var train in result.Data.List)
             {
-                train.DepartureDate = DateTime.Parse(train.From.Date.Split(',')[1]);
+                train.DepartureDate = DateTime.ParseExact(train.From.Date.Split(',')[1].Replace(".", "/").Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 train.DepartureDate += train.From.Time;
-                train.ArrivalDate = DateTime.Parse(train.To.Date.Split(',')[1]);
+                train.ArrivalDate = DateTime.ParseExact(train.To.Date.Split(',')[1].Replace(".", "/").Trim(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 train.ArrivalDate += train.To.Time;
                 train.BookingLink = linkBuilder.BuildRailwayLink(train);
             }

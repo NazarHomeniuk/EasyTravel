@@ -32,10 +32,8 @@ export class RailwayCardComponent implements OnInit {
     request.to = this.to;
     request.date = this.date;
     request.time = this.time;
-    console.log(request);
     this.railwayService.getAllTrains(request).subscribe(trains => {
       this.isLoading = false;
-      console.log(trains);
       this.trains = trains;
     })
   }
@@ -51,11 +49,9 @@ export class RailwayCardComponent implements OnInit {
     request.from = this.from;
     request.to = this.to;
     request.date = this.date;
-    console.log(request);
     this.railwayService.getAllTrains(request).subscribe(trains => {
       this.trains = trains;
       this.isLoading = false;
-      console.log(this.trains);
     })
   }
 

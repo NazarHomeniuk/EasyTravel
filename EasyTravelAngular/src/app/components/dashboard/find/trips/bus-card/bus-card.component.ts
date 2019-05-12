@@ -32,10 +32,8 @@ export class BusCardComponent implements OnInit {
     request.to = this.to;
     request.date = this.date;
     request.time = this.time;
-    console.log(request);
     this.busService.getAllBuses(request).subscribe(buses => {
       this.isLoading = false;
-      console.log(buses);
       this.buses = buses;
     })
   }
@@ -51,11 +49,9 @@ export class BusCardComponent implements OnInit {
     request.from = this.from;
     request.to = this.to;
     request.date = this.date;
-    console.log(request);
     this.busService.getAllBuses(request).subscribe(buses => {
       this.buses = buses;
       this.isLoading = false;
-      console.log(this.buses);
     })
   }
 

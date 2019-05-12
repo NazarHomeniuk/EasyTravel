@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using EasyTravel.Core.Models.Bus;
 using HtmlAgilityPack;
@@ -85,8 +86,7 @@ namespace EasyTravel.Services.Helpers.Bus
             TimeSpan.TryParse(descendants[0].InnerHtml, out var departureTime);
             result.DepartureTime = departureTime;
             descendants = htmlDoc.DocumentNode.Descendants("td").Where(d => d.HasAttributes).ToArray();
-            DateTime.TryParse(descendants[0].InnerHtml, out var departureDate);
-            result.Date = departureDate;
+            result.Date = DateTime.ParseExact(descendants[0].InnerHtml.Replace(".", "/").Trim(), "dd/MM/yy", CultureInfo.InvariantCulture);
             var temp = descendants[2].InnerText.Replace("\n", "").Replace(" ", "");
             var arrivalTime = temp.Remove(5, temp.Length - 5);
             TimeSpan.TryParse(arrivalTime, out var arrivalTimeResult);

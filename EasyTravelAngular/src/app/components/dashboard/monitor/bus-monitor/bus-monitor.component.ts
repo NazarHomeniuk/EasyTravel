@@ -17,7 +17,6 @@ export class BusMonitorComponent implements OnInit {
 
   ngOnInit() {
     this.monitorService.getAll().subscribe(data => {
-      console.log(data);
       this.monitor = data;
     });
   }

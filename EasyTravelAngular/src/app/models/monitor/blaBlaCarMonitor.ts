@@ -3,7 +3,7 @@ import { Trip } from '../blaBlaCar/trip';
 export class BlaBlaCarMonitor {
     from: string;
     to: string;
-    departureDate: Date;
+    departureDate: string;
     minPlaces: number;
     isInProcess: boolean;
     isSuccessful: boolean;

@@ -32,11 +32,9 @@ export class BlaBlaCarCardComponent implements OnInit {
     request.to = this.to;
     request.date = this.date;
     request.time = this.time;
-    console.log(request);
     this.blaBlaCarService.getAllCars(request).subscribe(cars => {
       this.cars = cars;
       this.isLoading = false;
-      console.log(this.cars);
     })
   }
 
@@ -54,7 +52,6 @@ export class BlaBlaCarCardComponent implements OnInit {
     this.blaBlaCarService.getAllCars(request).subscribe(cars => {
       this.cars = cars;
       this.isLoading = false;
-      console.log(this.cars);
     })
   }
 

@@ -44,10 +44,9 @@ export class BusMonitorDialogComponent implements OnInit {
     let hours = time.toString().split(':')[0];
     let minutes = time.toString().split(':')[1];
     var date = this.dateInput.value;
-    date.setHours(+hours);
+    date.setHours(+hours + 3);
     date.setMinutes(+minutes);
     monitor.departureDate = date;
-    console.log(monitor);
     this.busMonitorService.create(monitor).subscribe(data => {
       this.dialogRef.close();
     });
