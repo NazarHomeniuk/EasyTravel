@@ -60,7 +60,7 @@ namespace EasyTravel.HangFire.Jobs.Bus
                 var user = await dataContext.Users.FindAsync(monitoringResult.UserId);
                 if (user.EmailNotificationEnabled)
                 {
-                    smtpService.SendBusNotification(monitoringResult, user.Email);
+                    await smtpService.SendBusNotification(monitoringResult, user.Email);
                 }
 
                 if (user.SmsNotificationEnabled)

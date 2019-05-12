@@ -5,6 +5,7 @@ using System.Text;
 using EasyTravel.Contracts.Interfaces.Helpers;
 using EasyTravel.Contracts.Interfaces.Services;
 using EasyTravel.Contracts.Interfaces.Services.HangFire;
+using EasyTravel.Contracts.Interfaces.Services.Smtp;
 using EasyTravel.Core.Config;
 using EasyTravel.Core.Data;
 using EasyTravel.Core.Models.Identity;
@@ -66,6 +67,7 @@ namespace EasyTravel.API
             services.AddTransient<IHttpService, HttpService>();
             services.AddTransient<IMapsService, MapsService>();
             services.AddTransient<ILinkBuilder, LinkBuilder>();
+            services.AddTransient<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
 
             var connectionString = Configuration["ConnectionString:EasyTravel"];
             services.AddDbContext<DataContext>(opts => opts.UseSqlServer(connectionString,
