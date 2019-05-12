@@ -1,52 +1,57 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center center">
-<div fxLayout="row" class="logo-container" fxFlex="20" fxLayoutAlign="center center">
-  <div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="row" class="logo-container" fxFlex="20" fxLayoutAlign="center center">
+    <div fxLayout="column" fxLayoutAlign="center center">
       <img class="logo" src="./assets/images/logo-extented.png">
-  </div>
-</div>
-<div fxLayout="row" class="login-card" fxFlex fxLayoutAlign="center center">
-  <div class="login-card" fxLayout="column" fxLayoutAlign="center center">
-  <mat-card>
-    <div class="card-content" fxLayout="column" fxLayoutAlign="space-between center">
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div fxLayout="column" fxLayoutAlign="center center">
-          <mat-card-title>Авторизація</mat-card-title>
-          <mat-card-subtitle>Введіть вашу електронну адресу та пароль</mat-card-subtitle>
-        </div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="center center">
-        <div fxLayout="column" fxLayoutAlign="center center">
-          <mat-card-content>
-            <div class="card-form" fxLayout="column" fxLayoutAlign="center center">
-              <mat-form-field appearance="outline">
-                <mat-label>Електронна адреса</mat-label>
-                <input matInput [formControl]="emailField" placeholder="Електронна адреса">
-                <mat-icon matSuffix>alternate_email</mat-icon>
-                <mat-error *ngIf="emailField.invalid">{{getEmailErrorMessage()}}</mat-error>
-              </mat-form-field>
-              <mat-form-field appearance="outline">
-                <mat-label>Пароль</mat-label>
-                <input matInput [formControl]="passwordField" [type]="hide ? 'password' : 'text'" placeholder="Пароль">
-                <mat-icon matSuffix class="hide-icon" (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}
-                </mat-icon>
-                <mat-error *ngIf="passwordField.invalid">{{getPasswordErrorMessage()}}</mat-error>
-              </mat-form-field>
-            </div>
-          </mat-card-content>
-        </div>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="center end">
-        <mat-card-actions>
-          <div class="card-actions" fxLayout="column" fxLayoutAlign="end center" fxLayoutGap="10px">
-            <button mat-flat-button color="primary" (click)="login()"
-              [disabled]="passwordField.invalid || emailField.invalid">Увійти</button>
-            <label class="mat-body">Немає облікового запису? <a class="mat-body-strong"
-                routerLink="/register">Зареєструватись</a></label>
-          </div>
-        </mat-card-actions>
-      </div>
     </div>
-  </mat-card>
   </div>
-</div>
+  <div fxLayout="row" class="login-card" fxFlex fxLayoutAlign="center center">
+    <div class="login-card" fxLayout="column" fxLayoutAlign="center center">
+      <mat-card>
+        <div class="card-content" fxLayout="column" fxLayoutAlign="space-between center">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <mat-card-title>Авторизація</mat-card-title>
+              <mat-card-subtitle>Введіть вашу електронну адресу та пароль</mat-card-subtitle>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <mat-card-content>
+                <div class="card-form" fxLayout="column" fxLayoutAlign="center center">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Електронна адреса</mat-label>
+                    <input matInput [formControl]="emailField" placeholder="Електронна адреса">
+                    <mat-icon matSuffix>alternate_email</mat-icon>
+                    <mat-error *ngIf="emailField.invalid">{{getEmailErrorMessage()}}</mat-error>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Пароль</mat-label>
+                    <input matInput [formControl]="passwordField" [type]="hide ? 'password' : 'text'"
+                      placeholder="Пароль">
+                    <mat-icon matSuffix class="hide-icon" (click)="hide = !hide">
+                      {{hide ? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
+                    <mat-error *ngIf="passwordField.invalid">{{getPasswordErrorMessage()}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-card-content>
+            </div>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center end">
+            <mat-card-actions>
+              <div class="card-actions" fxLayout="column" fxLayoutAlign="end center" fxLayoutGap="10px">
+                <button mat-flat-button color="primary" (click)="login()"
+                  [disabled]="passwordField.invalid || emailField.invalid">Увійти</button>
+                <label class="mat-body">Немає облікового запису? <a class="mat-body-strong"
+                    routerLink="/register">Зареєструватись</a></label>
+              </div>
+            </mat-card-actions>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+  <div fxLayout="row" class="footer" fxFlex="10" fxLayoutAlign="center center">
+      <span class="mat-body">© Easy Travel {{ today | date:'yyyy' }}</span>
+    </div>
 </div>

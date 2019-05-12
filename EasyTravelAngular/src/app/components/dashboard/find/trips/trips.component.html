@@ -3,7 +3,7 @@
         <div fxLayout="row" fxLayoutAlign="center start">
             <h1>{{startLocation}}</h1>
         </div>
-        <div fxLayout="row" fxLayoutAlign="space-around start">
+        <div fxLayout="row wrap" fxLayoutAlign="space-around start">
             <div fxLayout="column" class="column" fxLayoutAlign="center center">
                 <app-railway-card class="card" (submitButton)="submit($event)" [from]="startLocation"
                     [to]="finishLocation" [date]="date" [time]=time></app-railway-card>
@@ -22,10 +22,9 @@
             <h1>{{finishLocation}}</h1>
         </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="space-evenly start">
-        <div fxLayout="row" fxLayoutAlign="space-between center" *ngFor="let trip of trips; let i = index">
+    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+        <div fxLayout="column" fxLayoutAlign="center center"  *ngFor="let trip of trips; let i = index">        
             <app-trip-card [trip]="trip"></app-trip-card>
-            <span>{{waitTime[i]}}</span>
         </div>
     </div>
 </div>

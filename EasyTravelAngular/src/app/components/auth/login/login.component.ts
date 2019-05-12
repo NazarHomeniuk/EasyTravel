@@ -14,6 +14,7 @@ import { first } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
 
   hide = true;
+  today = Date.now();
 
   loginModel = new LoginModel();
 

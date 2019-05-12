@@ -1,3 +1,12 @@
 .type {
     font-size: 13px;
 }
+
+.trip-list {
+    width: 100%;
+}
+
+.trip {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

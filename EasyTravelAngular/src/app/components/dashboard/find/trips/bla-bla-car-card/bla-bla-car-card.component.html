@@ -12,21 +12,30 @@
       <mat-progress-spinner color="primary" mode="indeterminate">
       </mat-progress-spinner>
     </div>
-    <mat-list>
-      <mat-list-item *ngFor="let car of cars;">
-        <mat-icon matListIcon>directions_car</mat-icon>
-        <h3 matLine>{{car.departure_place.city_name}} - {{car.arrival_place.city_name}}</h3>
-        <p matLine>
-          <span>{{car.departure_date| date:'dd.MM.yyyy HH:mm'}}</span>
-        </p>
-        <div fxLayout="row" fxLayoutAlign="center start" dir="ltr">
-          <span class="type">{{car.price.value}}</span>
-          <span class="type">&nbsp;грн</span>
+    <div *ngFor="let car of cars;">
+      <div class="trip-list">
+        <mat-divider></mat-divider>
+        <div fxLayout="row wrap" class="trip" fxLayoutAlign="space-between center">
+          <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center">
+            <mat-icon matListIcon>directions_car</mat-icon>
+          </div>
+          <div fxLayout="column" fxFlex="60" fxLayoutAlign="center start">
+            <label matLine>{{car.departure_place.city_name}} - {{car.arrival_place.city_name}}</label>
+            <span matLine>{{car.departure_date| date:'dd.MM.yyyy HH:mm'}}</span>
+          </div>
+          <div fxLayout="column" fxFlex="20" fxLayoutAlign="center center">
+            <div fxLayout="row" fxLayoutAlign="center start" dir="ltr">
+              <span class="type">{{car.price.value}}</span>
+              <span class="type">&nbsp;грн</span>
+            </div>
+          </div>
+          <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center">
+            <button mat-icon-button color="warn" (click)="submit(car);">
+              <mat-icon>check_circle_outline</mat-icon>
+            </button>
+          </div>
+        </div>
       </div>
-        <button mat-icon-button color="warn" (click)="submit(car);">
-          <mat-icon>check_circle_outline</mat-icon>
-        </button>
-      </mat-list-item>
-    </mat-list>
+    </div>
   </mat-expansion-panel>
 </mat-accordion>

@@ -9,24 +9,33 @@
             </mat-panel-description>
         </mat-expansion-panel-header>
         <div *ngIf="isLoading" fxLayout="row" fxLayoutAlign="center center">
-                <mat-progress-spinner color="primary" mode="indeterminate">
-                </mat-progress-spinner>
-              </div>
-        <mat-list>
-            <mat-list-item *ngFor="let bus of buses;">
-                <mat-icon matListIcon>directions_bus</mat-icon>
-                <h3 matLine>{{bus.from}} - {{bus.to}}</h3>
-                <p matLine>
-                    <span>{{bus.departureDate | date:'dd.MM.yyyy HH:mm'}}</span>
-                </p>
-                <div fxLayout="row" fxLayoutAlign="center start" dir="ltr">
-                    <span class="type">{{bus.price}}</span>
-                    <span class="type">&nbsp;грн</span>
+            <mat-progress-spinner color="primary" mode="indeterminate">
+            </mat-progress-spinner>
+        </div>
+        <div *ngFor="let bus of buses;">
+            <div class="trip-list">
+                <mat-divider></mat-divider>
+                <div fxLayout="row wrap" class="trip" fxLayoutAlign="space-between center">
+                    <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center">
+                        <mat-icon matListIcon>directions_bus</mat-icon>
+                    </div>
+                    <div fxLayout="column" fxFlex="60" fxLayoutAlign="center start">
+                        <label matLine>{{bus.from}} - {{bus.to}}</label>
+                            <span matLine>{{bus.departureDate | date:'dd.MM.yyyy HH:mm'}}</span>
+                    </div>
+                    <div fxLayout="column" fxFlex="20" fxLayoutAlign="center center">
+                        <div fxLayout="row" fxLayoutAlign="center start" dir="ltr">
+                            <span class="type">{{bus.price}}</span>
+                            <span class="type">&nbsp;грн</span>
+                        </div>
+                    </div>
+                    <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center">
+                        <button mat-icon-button color="warn" (click)="submit(bus)">
+                            <mat-icon>check_circle_outline</mat-icon>
+                        </button>
+                    </div>
                 </div>
-                <button mat-icon-button color="warn" (click)="submit(bus)">
-                    <mat-icon>check_circle_outline</mat-icon>
-                </button>
-            </mat-list-item>
-        </mat-list>
+            </div>
+        </div>
     </mat-expansion-panel>
 </mat-accordion>

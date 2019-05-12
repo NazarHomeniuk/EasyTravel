@@ -12,21 +12,28 @@
             <mat-progress-spinner color="primary" mode="indeterminate">
             </mat-progress-spinner>
         </div>
-        <mat-list>
-            <mat-list-item *ngFor="let train of trains;">
-                <mat-icon matListIcon>train</mat-icon>
-                <h3 matLine>{{train.from.station}} - {{train.to.station}}</h3>
-                <p matLine>
-                    <span>{{train.departureDate| date:'dd.MM.yyyy HH:mm'}}</span>
-                </p>
-                <div fxLayout="column" fxLayoutAlign="center start" dir="ltr">
-                    <span class="type" fxLayout="row" *ngFor="let type of train.types">{{type.letter}}:
-                        <strong>&nbsp;{{type.places}}</strong></span>
+        <div *ngFor="let train of trains;">
+            <div class="trip-list">
+                <mat-divider></mat-divider>
+                <div fxLayout="row wrap" class="trip" fxLayoutAlign="space-between center">
+                    <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center">
+                        <mat-icon>train</mat-icon>
+                    </div>
+                    <div fxLayout="column" fxFlex="60" fxLayoutAlign="center start">
+                        <label matLine>{{train.from.station}} - {{train.to.station}}</label>
+                        <span matLine>{{train.departureDate| date:'dd.MM.yyyy HH:mm'}}</span>
+                    </div>
+                    <div fxLayout="column" fxFlex="20" fxLayoutAlign="center start" dir="ltr">
+                        <span class="type" fxLayout="row" *ngFor="let type of train.types">{{type.letter}}:
+                            <strong>&nbsp;{{type.places}}</strong></span>
+                    </div>
+                    <div fxLayout="column" fxFlex="10" fxLayoutAlign="center center">
+                        <button mat-icon-button color="warn" (click)="submit(train)">
+                            <mat-icon>check_circle_outline</mat-icon>
+                        </button>
+                    </div>
                 </div>
-                <button mat-icon-button color="warn" (click)="submit(train)">
-                    <mat-icon>check_circle_outline</mat-icon>
-                </button>
-            </mat-list-item>
-        </mat-list>
+            </div>
+        </div>
     </mat-expansion-panel>
 </mat-accordion>

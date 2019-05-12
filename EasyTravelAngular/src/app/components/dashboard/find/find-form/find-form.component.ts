@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LocationsService } from 'src/app/services';
 import { Observable } from 'rxjs';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -10,18 +10,18 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./find-form.component.css']
 })
 export class FindFormComponent implements OnInit {
-  
-  fromInput = new FormControl();
-  toInput = new FormControl();
-  dateInput = new FormControl();
-  timeInput = new FormControl();
+
+  fromInput = new FormControl('', Validators.required);
+  toInput = new FormControl('', Validators.required);
+  dateInput = new FormControl('', Validators.required);
+  timeInput = new FormControl('', Validators.required);
 
   minDate = new Date(Date.now());
   @Output() submitButton = new EventEmitter();
-  
+
   options: Observable<string[]>;
 
-  constructor(private locationsService: LocationsService) { 
+  constructor(private locationsService: LocationsService) {
 
   }
 
@@ -35,16 +35,20 @@ export class FindFormComponent implements OnInit {
       if (prefix.length != 0) {
         this.autocomplete(prefix)
       }
-    });   
+    });
   }
 
   submit() {
-    this.submitButton.emit({ 
-      from: this.fromInput.value, 
+    this.submitButton.emit({
+      from: this.fromInput.value,
       to: this.toInput.value,
       date: this.dateInput.value,
-      time: this.timeInput.value 
+      time: this.timeInput.value
     });
+  }
+
+  isValid() {
+    return this.fromInput.valid && this.toInput.valid && this.dateInput.valid && this.timeInput.valid;
   }
 
   private autocomplete(value: string) {

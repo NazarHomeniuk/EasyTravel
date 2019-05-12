@@ -3,10 +3,10 @@
   }
 
 mat-card {
-  min-width: 250px;
-  min-height: 340px;
+  min-width: 300px;
+  min-height: 320px;
   height: 30%;
-  width: 25%;
+  width: 30%;
   } 
 
 mat-card-subtitle {
@@ -42,6 +42,7 @@ a:active {
 
   .logo {
     margin-top: 5%;
+    min-width: 350px;
     width: 60%;
   }
 
@@ -51,4 +52,8 @@ a:active {
 
   .container {
     height: 100%;
+  }
+
+  .footer {
+    color: white;
   }
