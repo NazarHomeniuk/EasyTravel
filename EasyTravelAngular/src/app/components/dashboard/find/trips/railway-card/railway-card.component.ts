@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { RailwayService } from 'src/app/services';
-import { Request, Train, BaseTrip, TripType } from 'src/app/models';
+import { RailwayService, RailwayMonitorService } from 'src/app/services';
+import { Request, Train, BaseTrip, TripType, RailwayMonitor } from 'src/app/models';
 import { Time } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-railway-card',
@@ -10,7 +11,7 @@ import { Time } from '@angular/common';
 })
 export class RailwayCardComponent implements OnInit {
 
-  constructor(private railwayService: RailwayService) { }
+  constructor(private railwayService: RailwayService, private monitoringService: RailwayMonitorService, private snackBar: MatSnackBar) { }
 
   @Output() submitButton = new EventEmitter();
   @Input() from: string;
@@ -61,6 +62,23 @@ export class RailwayCardComponent implements OnInit {
     trip.train = train;
     this.submitButton.emit(trip);
     this.trains.length = 0;
+  }
+
+  createMonitoring() {
+    var monitoring = new RailwayMonitor();
+    monitoring.from = this.from;
+    monitoring.to = this.to;
+    monitoring.departureDate = this.date;
+    this.monitoringService.create(monitoring).subscribe(result => {
+      this.snackBar.open("Моніторинг створено", "Закрити", {
+        duration: 3000
+      });
+    },
+      error => {
+        this.snackBar.open(error, "Закрити", {
+          duration: 3000
+        });
+      });
   }
 
 }

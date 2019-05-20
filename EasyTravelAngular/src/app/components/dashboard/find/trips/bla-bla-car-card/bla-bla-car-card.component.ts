@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Trip, Request, BaseTrip, TripType } from 'src/app/models';
-import { BlaBlaCarService } from 'src/app/services';
+import { Trip, Request, BaseTrip, TripType, BlaBlaCarMonitor } from 'src/app/models';
+import { BlaBlaCarService, BlaBlaCarMonitorService } from 'src/app/services';
 import { Time } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-bla-bla-car-card',
@@ -10,7 +11,7 @@ import { Time } from '@angular/common';
 })
 export class BlaBlaCarCardComponent implements OnInit {
 
-  constructor(private blaBlaCarService: BlaBlaCarService) { }
+  constructor(private blaBlaCarService: BlaBlaCarService, private monitoringService: BlaBlaCarMonitorService, private snackBar: MatSnackBar) { }
 
   @Output() submitButton = new EventEmitter();
   @Input() from: string;
@@ -63,4 +64,20 @@ export class BlaBlaCarCardComponent implements OnInit {
     this.submitButton.emit(trip);
   }
 
+  createMonitoring() {
+    var monitoring = new BlaBlaCarMonitor();
+    monitoring.from = this.from;
+    monitoring.to = this.to;
+    monitoring.departureDate = this.date;
+    this.monitoringService.create(monitoring).subscribe(result => {
+      this.snackBar.open("Моніторинг створено", "Закрити", {
+        duration: 3000
+      });
+    },
+      error => {
+        this.snackBar.open(error, "Закрити", {
+          duration: 3000
+        });
+      });
+  }
 }

@@ -12,6 +12,17 @@
             <mat-progress-spinner color="primary" mode="indeterminate">
             </mat-progress-spinner>
         </div>
+        <div *ngIf="!isLoading && trains.length == 0" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center center">
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-icon>sentiment_dissatisfied</mat-icon>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <label matLine>На жаль, поїздок не знайдено</label>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" (click)="createMonitoring()">
+                <button mat-flat-button color="primary">Створити моніторинг</button>
+            </div>
+        </div>
         <div *ngFor="let train of trains;">
             <div class="trip-list">
                 <mat-divider></mat-divider>

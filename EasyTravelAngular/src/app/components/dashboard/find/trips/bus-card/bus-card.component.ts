@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { BusService } from 'src/app/services';
+import { BusService, BusMonitorService } from 'src/app/services';
 import { Time } from '@angular/common';
-import { BusTrip, Request, BaseTrip, TripType } from 'src/app/models';
+import { BusTrip, Request, BaseTrip, TripType, BusMonitor } from 'src/app/models';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-bus-card',
@@ -10,7 +11,7 @@ import { BusTrip, Request, BaseTrip, TripType } from 'src/app/models';
 })
 export class BusCardComponent implements OnInit {
 
-  constructor(private busService: BusService) { }
+  constructor(private busService: BusService, private monitoringService: BusMonitorService, private snackBar: MatSnackBar) { }
 
   @Output() submitButton = new EventEmitter();
   @Input() from: string;
@@ -61,5 +62,22 @@ export class BusCardComponent implements OnInit {
     trip.bus = bus;
     this.submitButton.emit(trip);
     this.buses.length = 0;
+  }
+
+  createMonitoring() {
+    var monitoring = new BusMonitor();
+    monitoring.from = this.from;
+    monitoring.to = this.to;
+    monitoring.departureDate = this.date;
+    this.monitoringService.create(monitoring).subscribe(result => {
+      this.snackBar.open("Моніторинг створено", "Закрити", {
+        duration: 3000
+      });
+    },
+      error => {
+        this.snackBar.open(error, "Закрити", {
+          duration: 3000
+        });
+      });
   }
 }

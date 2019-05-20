@@ -60,7 +60,7 @@
       <mat-card-subtitle>Попутник</mat-card-subtitle>
       <mat-card-content>
         <div class="content" fxLayout="column" fxLayoutAlign="start start">
-          <label class="mat-body">
+          <label class="mat-body" *ngIf="trip.car.car != null">
             Автомобіль: {{trip.car.car.make}} {{trip.car.car.model}}
           </label>
           <label class="mat-body">
