@@ -9,6 +9,8 @@ namespace EasyTravel.Contracts.Interfaces.Services
     {
         Task StartMonitoring(string from, string to, DateTime departureDate, string placesType, int minPlaces, string userId);
 
+        Task StopMonitoring(string id);
+
         Task<IEnumerable<IMonitoring>> GetAllMonitoringForUser(string userId);
     }
 }

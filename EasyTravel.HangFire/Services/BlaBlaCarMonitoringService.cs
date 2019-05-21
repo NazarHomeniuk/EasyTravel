@@ -45,6 +45,16 @@ namespace EasyTravel.HangFire.Services
                 hangFireConfig.MonitoringCron);
         }
 
+        public async Task StopMonitoring(string id)
+        {
+            var monitoring = await dataContext.BlaBlaCarMonitoring.FirstOrDefaultAsync(m => m.Guid == id);
+            if (monitoring != null)
+            {
+                dataContext.BlaBlaCarMonitoring.Remove(monitoring);
+                RecurringJob.RemoveIfExists(monitoring.Guid);
+            }
+        }
+
         public async Task<IEnumerable<IMonitoring>> GetAllMonitoringForUser(string userId)
         {
             var user = await dataContext.Users.Include(u => u.BlaBlaCarMonitoring).ThenInclude(t => t.Trips).ThenInclude(t => t.DeparturePlace)

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using EasyTravel.API.ViewModels.Monitoring;
 using EasyTravel.Contracts.Interfaces.Services.HangFire;
 using EasyTravel.Core.Models.Identity;
@@ -38,6 +39,21 @@ namespace EasyTravel.API.Controllers
             var user = await userManager.GetUserAsync(User);
             await monitoringService.StartMonitoring(viewModel.From, viewModel.To, viewModel.DepartureDate, user.Id);
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("remove")]
+        public async Task<IActionResult> Remove(string guid)
+        {
+            try
+            {
+                await monitoringService.StopMonitoring(guid);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }
