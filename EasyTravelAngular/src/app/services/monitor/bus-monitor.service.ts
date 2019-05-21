@@ -18,4 +18,8 @@ export class BusMonitorService {
   create(monitor: BusMonitor) : Observable<any> {
     return this.httpClient.post(`${environment.API_URL}busMonitoring/create`, monitor);
   }
+
+  remove(guid: string) : Observable<any> {
+    return this.httpClient.post(`${environment.API_URL}busMonitoring/remove`, guid);
+  }
 }

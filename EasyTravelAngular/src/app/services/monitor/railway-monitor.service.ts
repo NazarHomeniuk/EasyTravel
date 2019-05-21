@@ -18,4 +18,8 @@ export class RailwayMonitorService {
   create(monitor: RailwayMonitor) : Observable<any> {
     return this.httpClient.post(`${environment.API_URL}railwayMonitoring/create`, monitor);
   }
+
+  remove(guid: string) : Observable<any> {
+    return this.httpClient.post(`${environment.API_URL}railwayMonitoring/remove`, guid);
+  }
 }

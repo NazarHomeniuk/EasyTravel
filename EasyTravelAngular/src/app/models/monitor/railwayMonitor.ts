@@ -8,7 +8,8 @@ export class RailwayMonitor {
     minPlaces: number;
     isInProcess: boolean;
     isSuccessful: boolean;
-    trips: Train[]; 
+    trips: Train[];
+    guid: string; 
 
     constructor() {}
 }

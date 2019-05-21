@@ -10,3 +10,12 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.remove-icon {
+    cursor: pointer;
+}
+
+.mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }

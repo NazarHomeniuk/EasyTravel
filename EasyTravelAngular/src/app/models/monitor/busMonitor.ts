@@ -7,6 +7,7 @@ export class BusMonitor {
     isInProcess: boolean;
     isSuccessful: boolean;
     trips: BusTrip[];
+    guid: string;
 
     constructor() {}
 }

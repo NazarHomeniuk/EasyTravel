@@ -8,6 +8,7 @@ export class BlaBlaCarMonitor {
     isInProcess: boolean;
     isSuccessful: boolean;
     trips: Trip[];
+    guid: string;
 
     constructor() {}
 }

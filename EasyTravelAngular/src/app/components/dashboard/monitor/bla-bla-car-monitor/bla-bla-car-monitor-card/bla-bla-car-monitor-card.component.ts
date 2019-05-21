@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BlaBlaCarMonitor } from 'src/app/models';
+import { BlaBlaCarMonitorService } from 'src/app/services';
 
 @Component({
   selector: 'app-bla-bla-car-monitor-card',
@@ -10,9 +11,14 @@ export class BlaBlaCarMonitorCardComponent implements OnInit {
 
   @Input() monitor: BlaBlaCarMonitor;
 
-  constructor() { }
+  constructor(private monitorService: BlaBlaCarMonitorService) { }
 
   ngOnInit() {
   }
 
+  remove() {
+    console.log("test");
+    this.monitorService.remove(this.monitor.guid).subscribe(result => {
+    });
+  }
 }

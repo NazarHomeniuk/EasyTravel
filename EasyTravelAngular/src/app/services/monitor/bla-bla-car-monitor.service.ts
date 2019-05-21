@@ -18,4 +18,8 @@ export class BlaBlaCarMonitorService {
   create(monitor: BlaBlaCarMonitor) : Observable<any> {
     return this.httpClient.post(`${environment.API_URL}blaBlaCarMonitoring/create`, monitor);
   }
+
+  remove(guid: string) : Observable<any> {
+    return this.httpClient.post(`${environment.API_URL}blaBlaCarMonitoring/remove`, {guid: guid});
+  }
 }

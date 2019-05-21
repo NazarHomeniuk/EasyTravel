@@ -10,6 +10,7 @@
     </mat-panel-title>
     <mat-panel-description>
       {{monitor.departureDate | date:'dd.MM.yyyy HH:mm'}}
+      <mat-icon class="remove-icon" *ngIf="monitor.isInProcess || !monitor.isSuccessful" color="warn">clear</mat-icon>
     </mat-panel-description>
   </mat-expansion-panel-header>
   <div *ngFor="let trip of monitor.trips">
