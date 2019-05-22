@@ -1,22 +1,27 @@
-variables:
-  buildConfiguration: 'Release'
-
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+ 
+trigger:
+- master
+ 
+pool:
+  vmImage: 'Ubuntu-16.04'
+ 
 steps:
-
-- task: Npm@1
-  displayName: 'npm install'
+- task: NodeTool@0
   inputs:
-    command: install
-    workingDir: EasyTravelAngular
-
-- task: Npm@1
-  displayName: 'Build Angular'
+    versionSpec: '8.x'
+  displayName: 'Install Node.js'
+ 
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
+ 
+# Publish Artifacts
+- task: PublishBuildArtifacts@1
   inputs:
-    command: custom
-    customCommand: run build -- --prod
-    workingDir: EasyTravelAngular
-
-- task: PublishPipelineArtifact@0
-  inputs:
-    artifactName: 'angular'
-    targetPath: 'EasyTravelAngular/dist'
+    artifactName: dist
+    pathtoPublish: 'dist' 
